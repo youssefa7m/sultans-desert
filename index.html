@@ -1,131 +1,32 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Discover unforgettable Morocco experiences with Sultans Desert. Explore Agafay Desert adventures, camel rides, buggy tours and Moroccan dinner experiences.">
-  <meta name="theme-color" content="#171812">
-  <title>Sultans Desert | Morocco Travel & Adventures</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Book Agafay Desert activities with Sultans Desert. Free transport from Marrakech.">
+<title>Sultans Desert | Agafay Desert Activities</title><link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="announcement" data-i18n="announcement">Private and shared experiences around Marrakech · Book directly with us</div>
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="Sultans Desert home">
-      <span class="brand-mark">SD</span>
-      <span class="brand-name">SULTANS <em>DESERT</em><small data-i18n="brandSub">MOROCCO EXPERIENCES</small></span>
-    </a>
-    <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
-    <nav id="nav">
-      <a href="#experiences" data-i18n="navExperiences">Experiences</a>
-      <a href="#about" data-i18n="navAbout">Our story</a>
-      <a href="#how" data-i18n="navHow">How it works</a>
-      <a href="#contact" data-i18n="navContact">Contact</a>
-      <select id="language" aria-label="Select language">
-        <option value="en">EN</option><option value="fr">FR</option><option value="es">ES</option>
-      </select>
-      <a class="nav-cta" href="#experiences" data-i18n="navBook">Explore experiences</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="hero" id="home">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <p class="eyebrow" data-i18n="heroEyebrow">MOROCCO · DESERT · CULTURE</p>
-        <h1 data-i18n="heroTitle">Your Morocco story<br><span>starts here.</span></h1>
-        <p class="hero-copy" data-i18n="heroText">Discover the magic beyond Marrakech with memorable desert adventures, local hospitality and experiences made for you.</p>
-        <div class="hero-actions">
-          <a class="button button-gold" href="#experiences" data-i18n="heroButton">Discover experiences <span>↗</span></a>
-          <a class="text-link" href="#about" data-i18n="heroSecondary">Get to know us</a>
-        </div>
-        <div class="hero-note"><span class="note-dot"></span><span data-i18n="heroNote">Small moments. Big memories.</span></div>
-      </div>
-      <div class="hero-bottom">
-        <span>31° 30′ N · 8° 10′ W</span>
-        <span data-i18n="heroLocation">AGAFAY DESERT, MOROCCO</span>
-      </div>
-    </section>
-
-    <section class="intro section-wrap">
-      <div class="section-kicker" data-i18n="introKicker">MORE THAN A TRIP</div>
-      <div class="intro-grid">
-        <h2 data-i18n="introTitle">Feel the soul<br>of Morocco.</h2>
-        <div>
-          <p data-i18n="introText">From open desert landscapes to warm Moroccan hospitality, Sultans Desert brings together experiences that help you discover the country in your own way.</p>
-          <a class="underlined-link" href="#experiences" data-i18n="introLink">Find your experience <span>↗</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="experiences section-wrap" id="experiences">
-      <div class="section-heading">
-        <div><div class="section-kicker" data-i18n="expKicker">CHOOSE YOUR ADVENTURE</div><h2 data-i18n="expTitle">Experiences to remember</h2></div>
-        <p data-i18n="expText">Choose your pace, gather your people, and let Morocco surprise you.</p>
-      </div>
-      <div class="cards">
-        <article class="experience-card">
-          <div class="card-image quad"><span class="card-tag" data-i18n="tagAdventure">ADVENTURE</span></div>
-          <div class="card-body"><div class="card-meta" data-i18n="quadMeta">AGAFAY DESERT · GUIDED RIDE</div><h3 data-i18n="quadTitle">Quad Biking</h3><p data-i18n="quadText">Ride through rugged desert trails and take in the wide-open landscapes.</p><a href="#contact" class="card-link" data-activity="Quad Biking" data-i18n="cardAsk">Ask about this experience <span>↗</span></a></div>
-        </article>
-        <article class="experience-card">
-          <div class="card-image camel"><span class="card-tag" data-i18n="tagTradition">TRADITION</span></div>
-          <div class="card-body"><div class="card-meta" data-i18n="camelMeta">MOROCCAN LANDSCAPES · SLOW TRAVEL</div><h3 data-i18n="camelTitle">Camel Ride</h3><p data-i18n="camelText">Enjoy a timeless way to discover the desert scenery and capture the moment.</p><a href="#contact" class="card-link" data-activity="Camel Ride" data-i18n="cardAsk">Ask about this experience <span>↗</span></a></div>
-        </article>
-        <article class="experience-card">
-          <div class="card-image dinner"><span class="card-tag" data-i18n="tagCulture">CULTURE</span></div>
-          <div class="card-body"><div class="card-meta" data-i18n="dinnerMeta">LOCAL FOOD · EVENING</div><h3 data-i18n="dinnerTitle">Dinner Under the Stars</h3><p data-i18n="dinnerText">Share Moroccan flavours and a special evening in a desert setting.</p><a href="#contact" class="card-link" data-activity="Dinner Under the Stars" data-i18n="cardAsk">Ask about this experience <span>↗</span></a></div>
-        </article>
-      </div>
-      <div class="more-experiences">
-        <div><strong data-i18n="moreTitle">Your adventure, your way.</strong><span data-i18n="moreText">Buggy tours, lunch experiences and private packages can also be arranged.</span></div>
-        <a class="button button-dark" href="#contact" data-i18n="moreButton">Plan a custom trip <span>↗</span></a>
-      </div>
-    </section>
-
-    <section class="story" id="about">
-      <div class="story-image" role="img" aria-label="Moroccan desert landscape at sunset"></div>
-      <div class="story-copy">
-        <div class="section-kicker" data-i18n="storyKicker">THE SULTANS DESERT WAY</div>
-        <h2 data-i18n="storyTitle">Travel with curiosity.<br>Leave with a story.</h2>
-        <p data-i18n="storyText">We believe the best journeys are about more than places. They are about the people you meet, the landscapes you remember and the moments you share.</p>
-        <div class="values">
-          <div><span>01</span><strong data-i18n="value1">Local experiences</strong></div>
-          <div><span>02</span><strong data-i18n="value2">Clear communication</strong></div>
-          <div><span>03</span><strong data-i18n="value3">Thoughtful planning</strong></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="steps section-wrap" id="how">
-      <div class="section-kicker" data-i18n="stepsKicker">SIMPLE FROM START TO FINISH</div>
-      <h2 data-i18n="stepsTitle">Your trip in three steps</h2>
-      <div class="step-grid">
-        <div class="step"><span>01</span><h3 data-i18n="step1Title">Choose</h3><p data-i18n="step1Text">Explore our experiences or tell us what kind of day you have in mind.</p></div>
-        <div class="step"><span>02</span><h3 data-i18n="step2Title">Connect</h3><p data-i18n="step2Text">Message us to confirm availability, price, meeting point and details.</p></div>
-        <div class="step"><span>03</span><h3 data-i18n="step3Title">Enjoy</h3><p data-i18n="step3Text">Get ready to discover Morocco. We will help you understand the plan before you go.</p></div>
-      </div>
-    </section>
-
-    <section class="cta-band" id="contact">
-      <div class="cta-content">
-        <div class="section-kicker" data-i18n="ctaKicker">LET'S PLAN YOUR DAY</div>
-        <h2 data-i18n="ctaTitle">Morocco is calling.</h2>
-        <p data-i18n="ctaText">Tell us your dates, group size and the experience you are looking for. We’ll help you explore the options.</p>
-        <a id="whatsappLink" class="button button-gold" href="#" target="_blank" rel="noopener"><span data-i18n="ctaButton">Plan your experience on WhatsApp</span> <span>↗</span></a>
-        <small data-i18n="ctaNote">Availability and final prices are confirmed directly before booking.</small>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <a class="brand footer-brand" href="#home"><span class="brand-mark">SD</span><span class="brand-name">SULTANS <em>DESERT</em><small>MOROCCO EXPERIENCES</small></span></a>
-    <p data-i18n="footerText">Discover Morocco through unforgettable experiences.</p>
-    <div class="footer-bottom"><span>© <span id="year"></span> Sultans Desert</span><span data-i18n="footerSmall">Made for curious travellers.</span></div>
-  </footer>
-  <script src="script.js"></script>
-</body>
-</html>
+<header class="top"><a class="brand" href="#home"><span class="monogram">SD</span><span>SULTANS <b>DESERT</b><small>MOROCCO EXPERIENCES</small></span></a><nav><a href="#packs">Packages</a><a href="#activities">Activities</a><a href="#booking">Booking</a></nav><a class="smallbook" href="#booking">BOOK NOW ↗</a></header>
+<main>
+<section class="hero" id="home"><img class="hero-photo" src="assets/agafay-cover.png" alt="Agafay Desert, from Sultans Desert's photo collection"><div class="shade"></div><div class="hero-copy"><p class="eyebrow">MARRAKECH · AGAFAY DESERT · MOROCCO</p><h1>Discover<br><i>Agafay Desert.</i></h1><p>Adventure, Moroccan hospitality and unforgettable moments.</p><div class="hero-actions"><a class="button gold" href="#packs">Explore packages ↗</a><span>✓ Free transport from Marrakech</span></div></div></section>
+<section class="intro"><p class="eyebrow">YOUR DESERT EXPERIENCE</p><h2>Choose your experience.<br><i>We’ll help with the details.</i></h2><p>Choose a package or book an activity on its own. Confirm availability, pickup details and the final price with us before booking.</p></section>
+<section id="packs" class="listing"><div class="section-head"><div><p class="eyebrow">COMBINE YOUR FAVORITES</p><h2>Our packages</h2></div><p class="transport">✦ Free transport from Marrakech</p></div><div class="cards">
+<article class="card"><img src="assets/quad-group.jpg" alt="Quad ride in Agafay from our photo collection"><div class="card-content"><span class="tag">ADVENTURE + DINNER</span><h3>Quad + Camel + Dinner</h3><p>Choose a 30-minute or 1-hour quad ride, camel ride and Moroccan dinner.</p><div class="features"><span>Quad: 30 min / 1 h</span><span>Camel ride</span><span>Dinner</span></div><a class="button dark book" data-package="Quad + Camel + Dinner" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/quad-ride.jpeg" alt="Quad ride in Agafay from our photo collection"><div class="card-content"><span class="tag">ADVENTURE + LUNCH</span><h3>Quad + Camel + Lunch</h3><p>Choose a 30-minute or 1-hour quad ride, camel ride and Moroccan lunch.</p><div class="features"><span>Quad: 30 min / 1 h</span><span>Camel ride</span><span>Lunch</span></div><a class="button dark book" data-package="Quad + Camel + Lunch" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/buggy-sunset.jpeg" alt="Buggy ride at sunset in Agafay from our photo collection"><div class="card-content"><span class="tag">BUGGY + MEAL</span><h3>Buggy + Camel + Lunch or Dinner</h3><p>Choose a 1-hour or 2-hour buggy ride, camel ride and your preferred meal.</p><div class="features"><span>Buggy: 1 h / 2 h</span><span>Camel ride</span><span>Lunch or dinner</span></div><a class="button dark book" data-package="Buggy + Camel + Lunch or Dinner" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/moroccan-lunch.jpg" alt="Moroccan food from our photo collection"><div class="card-content"><span class="tag">MOROCCAN FOOD</span><h3>Moroccan Lunch</h3><p>Enjoy a Moroccan lunch in the Agafay area.</p><div class="features"><span>Lunch</span><span>Transport from Marrakech</span></div><a class="button dark book" data-package="Moroccan Lunch" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/desert-pool.jpg" alt="Desert pool from our photo collection"><div class="card-content"><span class="tag">RELAX</span><h3>Camel + Lunch + Pool</h3><p>Combine a camel ride and lunch with pool access, subject to confirmation.</p><div class="features"><span>Camel ride</span><span>Lunch</span><span>Pool option</span></div><a class="button dark book" data-package="Camel + Lunch + Pool" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/desert-evening.jpg" alt="Desert evening from our photo collection"><div class="card-content"><span class="tag">SUNSET EVENING</span><h3>Camel + Dinner</h3><p>A camel ride followed by a Moroccan dinner in the desert.</p><div class="features"><span>Camel ride</span><span>Dinner</span></div><a class="button dark book" data-package="Camel + Dinner" href="#booking">BOOK NOW ↗</a></div></article>
+</div></section>
+<section id="activities" class="listing standalone"><div class="section-head"><div><p class="eyebrow">BOOK AN ACTIVITY ON ITS OWN</p><h2>Individual activities</h2></div><p class="transport">✦ Free transport from Marrakech</p></div><div class="cards three">
+<article class="card"><img src="assets/quad-ride.jpeg" alt="Quad biking photo provided by Sultans Desert"><div class="card-content"><span class="tag">QUAD BIKING</span><h3>Quad Ride</h3><p>Choose the ride duration that suits you.</p><label for="quad-duration">Duration</label><select id="quad-duration"><option>1 hour</option><option>2 hours</option></select><a class="button dark book-select" data-base="Quad Ride" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/buggy-sunset.jpeg" alt="Buggy photo provided by Sultans Desert"><div class="card-content"><span class="tag">OFF-ROAD ADVENTURE</span><h3>Buggy Ride</h3><p>Explore the rocky desert landscape with a buggy.</p><label for="buggy-duration">Duration</label><select id="buggy-duration"><option>1 hour</option><option>2 hours</option></select><a class="button dark book-select" data-base="Buggy Ride" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/camel-ride.jpg" alt="Camel ride photo provided by Sultans Desert"><div class="card-content"><span class="tag">TRADITION</span><h3>Camel Ride</h3><p>Enjoy a traditional camel ride in the desert.</p><div class="features"><span>Ask for duration and availability</span></div><a class="button dark book" data-package="Camel Ride" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/moroccan-lunch.jpg" alt="Lunch photo provided by Sultans Desert"><div class="card-content"><span class="tag">LUNCH</span><h3>Lunch + Quad</h3><p>Combine a quad ride with a Moroccan lunch.</p><div class="features"><span>Quad duration to confirm</span><span>Lunch</span></div><a class="button dark book" data-package="Lunch + Quad" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/desert-evening.jpg" alt="Dinner photo provided by Sultans Desert"><div class="card-content"><span class="tag">DINNER</span><h3>Dinner + Quad</h3><p>Pair a quad ride with a Moroccan dinner.</p><div class="features"><span>Quad duration to confirm</span><span>Dinner</span></div><a class="button dark book" data-package="Dinner + Quad" href="#booking">BOOK NOW ↗</a></div></article>
+<article class="card"><img src="assets/desert-pool.jpg" alt="Pool photo provided by Sultans Desert"><div class="card-content"><span class="tag">POOL OPTIONS</span><h3>Lunch or Dinner + Pool</h3><p>Ask us about meal and pool availability for your date.</p><div class="features"><span>Lunch or dinner</span><span>Pool availability to confirm</span></div><a class="button dark book" data-package="Lunch or Dinner + Pool" href="#booking">BOOK NOW ↗</a></div></article>
+</div></section>
+<section id="booking" class="booking"><div class="booking-copy"><p class="eyebrow">LET’S PLAN YOUR VISIT</p><h2>Book your Agafay experience.</h2><p>Send your preferred activity, date and group size. We’ll confirm availability, final price and pickup details.</p><p class="free">✓ Free transport from Marrakech</p></div><form id="booking-form"><label for="activity">Choose an activity</label><select id="activity" required><option value="">Select a package or activity</option><option>Quad + Camel + Dinner</option><option>Quad + Camel + Lunch</option><option>Buggy + Camel + Lunch or Dinner</option><option>Moroccan Lunch</option><option>Quad Ride</option><option>Buggy Ride</option><option>Lunch + Quad</option><option>Dinner + Quad</option><option>Camel + Dinner</option><option>Camel + Lunch + Pool</option><option>Lunch or Dinner + Pool</option><option>Camel Ride</option></select><div class="form-row"><div><label for="date">Preferred date</label><input id="date" type="date" required></div><div><label for="people">People</label><input id="people" type="number" min="1" value="2" required></div></div><label for="duration">Duration / options</label><select id="duration"><option>Tell me available options</option><option>Quad — 30 minutes</option><option>Quad — 1 hour</option><option>Quad — 2 hours</option><option>Buggy — 1 hour</option><option>Buggy — 2 hours</option><option>Lunch, no pool</option><option>Lunch with pool</option><option>Dinner, no pool</option><option>Dinner with pool (availability to confirm)</option></select><label for="notes">Extra details (optional)</label><textarea id="notes" rows="3" placeholder="Pickup area, questions or special requests"></textarea><button class="button gold submit" type="submit">REQUEST BOOKING ON WHATSAPP ↗</button><small>Prices, availability and pickup arrangements are confirmed before your booking is finalized.</small></form></section>
+</main><footer><a class="brand" href="#home"><span class="monogram">SD</span><span>SULTANS <b>DESERT</b><small>MOROCCO EXPERIENCES</small></span></a><p>Agafay Desert · Marrakech · Morocco</p><p>Free transport from Marrakech · Final details confirmed before booking</p><small>Logo and contact details to be added.</small></footer>
+<script src="script.js"></script>
+</body></html>

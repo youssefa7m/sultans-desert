@@ -1,19 +1,15 @@
-SULTANS DESERT WEBSITE — STARTER VERSION
+SULTANS DESERT — UPDATED WEBSITE STARTER
 
-Files:
-- index.html: website structure and text
-- styles.css: responsive design and visual styles
-- script.js: EN/FR/ES language switcher and WhatsApp booking links
+All activity photographs used in this version are the user's supplied original photo files. No new/generated photos are included. Photos are in assets/.
 
-IMPORTANT BEFORE PUBLISHING:
-1. In script.js, replace WHATSAPP_NUMBER = "212600000000" with your official business WhatsApp number in international format, without +, spaces, or dashes.
-2. Check all activity details, images, service availability, pickup policies, prices, cancellation terms, and legal/business information before publishing.
-3. The current site intentionally does not display prices because the latest prices and partner arrangements must be confirmed.
-4. The image URLs are external Unsplash images used as temporary visual placeholders. Replace with your own licensed activity photos before running paid ads.
-5. The language switcher currently supports English, French and Spanish. Arabic can be added as a later step with right-to-left layout support.
+Files: index.html, styles.css, script.js, assets/
 
-LOCAL PREVIEW:
-Open index.html in a browser. Internet access is needed for Google Fonts and the remote image URLs.
+BEFORE PUBLISHING:
+1. In script.js replace WHATSAPP_NUMBER = "212600000000" with your official business WhatsApp number, digits only and with country code.
+2. Confirm transport is genuinely free from Marrakech for every activity before advertising this promise.
+3. Add real prices, official logo, contact details and any required business/legal information.
+4. Confirm meal/pool availability for the chosen date before finalizing a booking.
 
-PUBLISHING PLAN:
-Recommended: upload the files to a GitHub repository and deploy the repository with Cloudflare Pages. Connect sultansdesert.com only after checking domain ownership, renewal status, and current DNS settings.
+The booking form opens WhatsApp with the selected activity, date, group size and options. It does not take payment or confirm a reservation automatically.
+
+For GitHub Pages, upload index.html, styles.css, script.js, README.txt and the entire assets folder directly into the repository root. Commit changes; GitHub Pages will rebuild the site.
