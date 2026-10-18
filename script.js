@@ -1,85 +1,165 @@
 
-const WHATSAPP_NUMBER = "212640140173";
+const WHATSAPP_NUMBER = "ADD_YOUR_WHATSAPP_NUMBER";
+const BOOKING_EMAIL = "sultansdesert@gmail.com";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("booking-form");
-
   if (!form) return;
 
-  const getValue = (id) => {
-    const element = document.getElementById(id);
-    return element ? element.value.trim() : "";
-  };
+  const value = (id) =>
+    document.getElementById(id)?.value?.trim() || "";
 
-  // Fill the activity field when a package booking button is clicked.
-  document.querySelectorAll(".book").forEach((button) => {
-    button.addEventListener("click", () => {
-      const activity = document.getElementById("activity");
-      const packageName = button.dataset.package;
-
-      if (activity && packageName) {
-        activity.value = packageName;
-      }
-    });
-  });
-
-  // Select the chosen quad or buggy duration before booking.
-  document.querySelectorAll(".book-select").forEach((button) => {
-    button.addEventListener("click", () => {
-      const base = button.dataset.base || "";
-      const activity = document.getElementById("activity");
-      const durationId = base.toLowerCase().includes("buggy")
-        ? "buggy-duration"
-        : "quad-duration";
-      const duration = document.getElementById(durationId);
-
-      if (activity) activity.value = base;
-
-      if (duration) {
-        const selected = duration.options[duration.selectedIndex].text;
-        const notes = document.getElementById("notes");
-
-        if (notes) {
-          notes.value = `${notes.value}\nSelected option: ${selected}`.trim();
-        }
-      }
-    });
-  });
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const name = getValue("customer-name");
-    const phone = getValue("customer-phone");
-    const activity = getValue("activity");
-    const date = getValue("date");
-    const people = getValue("people");
-    const duration = getValue("duration");
-    const notes = getValue("notes");
+  function bookingDetails() {
+    const name = value("customer-name");
+    const phone = value("customer-phone");
+    const activity = value("activity");
+    const date = value("date");
+    const people = value("people");
+    const duration = value("duration");
+    const notes = value("notes");
 
     if (!name || !phone || !activity || !date || !people) {
-      alert("Please complete all required booking fields.");
+      alert("Please complete your name, phone, activity, date and number of people.");
+      return null;
+    }
+
+    return [
+      "Hello Sultans Desert! I'd like to request a booking.",
+      "",
+      "Full name: " + name,
+      "Phone / WhatsApp: " + phone,
+      "Activity: " + activity,
+      "Preferred date: " + date,
+      "Number of people: " + people,
+      "Duration / option: " + (duration || "Not specified"),
+      "Pickup area / requests: " + (notes || "Not specified"),
+      "",
+      "Please confirm availability, pickup details and final price.",
+      "Payment method: Cash on Arrival."
+    ].join("\n");
+  }
+
+  function fillBooking(activity, option) {
+    const activityField = document.getElementById("activity");
+    const notesField = document.getElementById("notes");
+
+    if (activityField) {
+      activityField.value = activity;
+    }
+
+    if (option && notesField) {
+      notesField.value = [
+        notesField.value,
+        "Selected option: " + option
+      ].filter(Boolean).join("\n");
+    }
+  }
+
+  document.querySelectorAll(".book").forEach(button => {
+    button.addEventListener("click", () => {
+      fillBooking(button.dataset.package || "");
+      document.getElementById("booking")
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  document.getElementById("quad-book-button")
+    ?.addEventListener("click", () => {
+      fillBooking(
+        "Quad Ride",
+        value("quad-duration") + "; " + value("quad-sharing")
+      );
+
+      document.getElementById("booking")
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+
+  document.getElementById("buggy-book-button")
+    ?.addEventListener("click", () => {
+      fillBooking("Buggy Ride", value("buggy-duration"));
+
+      document.getElementById("booking")
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+
+  document.getElementById("camel-book-button")
+    ?.addEventListener("click", () => {
+      fillBooking("Camel Ride", value("camel-duration"));
+
+      document.getElementById("booking")
+        ?.scrollIntoView({ behavior: "smooth" });
+    });
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const message = bookingDetails();
+
+    if (message) {
+      sendEmail(message);
+    }
+  });
+
+  function sendEmail(message) {
+    const subject = "Sultans Desert Booking Request";
+
+    const url = "mailto:" + BOOKING_EMAIL +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(message);
+
+    window.location.href = url;
+  }
+
+  document.getElementById("send-email")
+    ?.addEventListener("click", () => {
+      const message = bookingDetails();
+
+      if (message) {
+        sendEmail(message);
+      }
+    });
+
+  function sendWhatsApp(message) {
+    if (
+      !WHATSAPP_NUMBER ||
+      WHATSAPP_NUMBER === "ADD_YOUR_WHATSAPP_NUMBER"
+    ) {
+      alert(
+        "WhatsApp number has not been added yet. Please use the email button or add your business WhatsApp number in script.js."
+      );
       return;
     }
 
-    const message = [
-      "Hello Sultans Desert! I'd like to request a booking.",
-      "",
-      `Full name: ${name}`,
-      `Phone / WhatsApp: ${phone}`,
-      `Activity: ${activity}`,
-      `Preferred date: ${date}`,
-      `Number of people: ${people}`,
-      `Duration / option: ${duration || "Not specified"}`,
-      `Pickup area / requests: ${notes || "Not specified"}`,
-      "",
-      "Please confirm availability, pickup details and the final price.",
-      "Payment method: Cash on Arrival."
-    ].join("\n");
+    const url = "https://wa.me/" + WHATSAPP_NUMBER +
+      "?text=" + encodeURIComponent(message);
 
-    const whatsappURL =
-      `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank");
+  }
 
-    window.open(whatsappURL, "_blank", "noopener,noreferrer");
-  });
+  document.getElementById("send-whatsapp")
+    ?.addEventListener("click", () => {
+      const message = bookingDetails();
+
+      if (message) {
+        sendWhatsApp(message);
+      }
+    });
+
+  const footerWhatsApp =
+    document.getElementById("footer-whatsapp");
+
+  if (footerWhatsApp) {
+    footerWhatsApp.addEventListener("click", event => {
+      event.preventDefault();
+
+      if (WHATSAPP_NUMBER === "ADD_YOUR_WHATSAPP_NUMBER") {
+        alert("Please add your real WhatsApp number in script.js first.");
+      } else {
+        window.open(
+          "https://wa.me/" + WHATSAPP_NUMBER,
+          "_blank"
+        );
+      }
+    });
+  }
 });
