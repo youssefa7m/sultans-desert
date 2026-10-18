@@ -2,128 +2,703 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#17221d">
-<meta name="description" content="Discover Agafay Desert with Sultans Desert. Quad biking, buggy rides, camel rides and Moroccan food.">
-<title>Sultans Desert | Agafay Desert Experiences</title>
-<link rel="stylesheet" href="styles.css">
-<style>
-.price-line{margin:14px 0 16px;padding:10px 12px;border-left:3px solid #caa45b;background:rgba(202,164,91,.12);border-radius:4px;color:inherit}
-.price-line strong{font-size:1.25rem;letter-spacing:.01em}
-.price-line small{font-size:.88rem;opacity:.78}
-.pricing-note{max-width:1100px;margin:0 auto 22px;padding:0 20px;font-size:.92rem;opacity:.8;line-height:1.6}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f6f1">
+  <meta name="description" content="Discover Agafay Desert with Sultans Desert. Enjoy quad biking, buggy adventures, camel rides, Moroccan food and desert experiences near Marrakech.">
+  <title>Sultans Desert | Agafay Desert Experiences</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Hero image and typography */
+    .hero {
+      position: relative;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: #28231e;
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero .shade {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg,rgba(15,18,15,.82),rgba(15,18,15,.42) 55%,rgba(15,18,15,.08));
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      width: min(760px,100%);
+      padding: 80px 7%;
+      color: white;
+    }
+    .hero-copy h1 {
+      font-size: clamp(48px,7vw,88px);
+      line-height: .98;
+      margin: 20px 0;
+      color: white;
+    }
+    .hero-copy h1 i {
+      color: #edc681;
+      font-style: normal;
+    }
+    .hero-tagline {
+      font-size: clamp(20px,2.5vw,30px);
+      font-weight: 700;
+    }
+    .hero-copy .eyebrow { color: #edc681; }
+    .hero-copy > p { max-width: 580px; line-height: 1.7; }
+    .hero-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 25px;
+      font-size: 13px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* Discount prices */
+    .offer-box {
+      margin: 14px 0 18px;
+      padding: 12px;
+      border: 1px solid #e3d0a4;
+      border-radius: 8px;
+      background: #fffaf0;
+    }
+    .offer-badge {
+      display: inline-block;
+      background: #245b43;
+      color: #fff;
+      border-radius: 4px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .04em;
+    }
+    .offer-prices {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 10px;
+    }
+    .old-price {
+      color: #888;
+      font-size: 15px;
+      text-decoration: line-through;
+    }
+    .new-price {
+      color: #245b43;
+      font-size: 25px;
+      font-weight: 800;
+    }
+    .offer-note {
+      margin: 7px 0 0;
+      color: #625c50;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .experience-details {
+      margin: 12px 0;
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+    .choice-label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .choice-select {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #d6d0c5;
+      border-radius: 6px;
+      background: white;
+      color: #25251f;
+      font: inherit;
+    }
+    .pricing-note {
+      max-width: 1100px;
+      margin: 0 auto 22px;
+      padding: 0 20px;
+      font-size: 13px;
+      line-height: 1.7;
+      opacity: .8;
+    }
+    .booking-intro {
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .cash-note {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin: 15px 0;
+      padding: 13px;
+      border-radius: 7px;
+      background: #f4efe3;
+      color: #302d26;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .booking-form label {
+      display: block;
+      margin: 12px 0 5px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    .booking-form input,
+    .booking-form select,
+    .booking-form textarea {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 11px;
+      border: 1px solid #d4d0c7;
+      border-radius: 6px;
+      font: inherit;
+      background: #fff;
+    }
+    .booking-form button { width: 100%; margin-top: 12px; }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .offer-section-label {
+      display: inline-block;
+      margin: 0 0 8px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      background: #245b43;
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    @media (max-width: 600px) {
+      .hero { min-height: 640px; }
+      .hero .shade {
+        background: linear-gradient(0deg,rgba(15,18,15,.92),rgba(15,18,15,.5) 65%,rgba(15,18,15,.1));
+      }
+      .hero-copy { align-self: flex-end; padding: 80px 22px 38px; }
+      .hero-highlights { flex-direction: column; }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+    }
+  </style>
 </head>
+
 <body>
 <header class="top">
-<a class="brand" href="#home"><span class="monogram">SD</span><span>SULTANS <b>DESERT</b><small>MOROCCO EXPERIENCES</small></span></a>
-<nav><a href="#packs">Packages</a><a href="#activities">Activities</a><a href="#booking">Contact</a></nav>
-<a class="smallbook" href="#booking">BOOK NOW ↗</a>
+  <a class="brand" href="#home" aria-label="Sultans Desert home">
+    <span class="monogram">SD</span>
+    <span>SULTANS <b>DESERT</b><small>MOROCCO EXPERIENCES</small></span>
+  </a>
+  <nav aria-label="Main navigation">
+    <a href="#packs">Packages</a>
+    <a href="#activities">Activities</a>
+    <a href="#booking">Contact</a>
+  </nav>
+  <a class="smallbook" href="#booking">BOOK NOW ↗</a>
 </header>
+
 <main>
-<section class="hero" id="home">
-<img class="hero-photo" src="quad-hero.png" alt="Quad biking adventure in Agafay Desert at sunset" fetchpriority="high">
-<div class="shade"></div>
-<div class="hero-copy">
-<p class="eyebrow">MARRAKECH · AGAFAY DESERT · MOROCCO</p>
-<h1>Discover<br><i>Agafay Desert.</i></h1>
-<p>Adventure, authentic Moroccan hospitality and unforgettable desert moments.</p>
-<div class="hero-actions"><a class="button gold" href="#packs">Explore experiences ↗</a><span>✓ Transport from Marrakech</span></div>
-</div>
-</section>
+  <!-- HOMEPAGE HERO -->
+  <section class="hero" id="home">
+    <img
+      class="hero-photo"
+      src="quad-hero.png"
+      alt="Two visitors enjoying quad biking in the Agafay Desert at sunset"
+      fetchpriority="high"
+    >
+    <div class="shade"></div>
+    <div class="hero-copy">
+      <p class="eyebrow">MARRAKECH · AGAFAY DESERT · MOROCCO</p>
+      <h1>SULTANS<br><i>DESERT</i></h1>
+      <p class="hero-tagline">Your Desert Adventure Starts Here.</p>
+      <p>
+        Discover quad biking, buggy adventures, camel rides and authentic
+        Moroccan hospitality in the beautiful Agafay Desert.
+      </p>
+      <div class="hero-actions">
+        <a class="button gold" href="#packs">EXPLORE EXPERIENCES ↗</a>
+        <a class="button dark" href="#booking">BOOK YOUR ADVENTURE</a>
+      </div>
+      <div class="hero-highlights">
+        <span>✓ Guided desert adventures</span>
+        <span>✓ Moroccan experiences</span>
+        <span>✓ Easy booking requests</span>
+      </div>
+    </div>
+  </section>
 
-<section class="intro">
-<p class="eyebrow">YOUR MOROCCAN ADVENTURE</p>
-<h2>Find your perfect experience.<br><i>Make memories in the desert.</i></h2>
-<p>Discover quad biking, buggy adventures, camel rides and traditional Moroccan meals. Choose an experience and send us your request.</p>
-</section>
+  <!-- INTRODUCTION -->
+  <section class="intro">
+    <p class="eyebrow">YOUR MOROCCAN ADVENTURE</p>
+    <h2>Discover the desert.<br><i>Make memories that last.</i></h2>
+    <p>
+      Explore Agafay through outdoor adventures, traditional Moroccan food
+      and unforgettable moments with a local guide.
+    </p>
+  </section>
 
-<section id="packs" class="listing">
-<div class="section-head"><div><p class="eyebrow">SHARE THE ADVENTURE</p><h2>Our packages</h2></div><p class="transport">✦ Transport from Marrakech</p></div>
-<p class="pricing-note">Prices are per person unless stated otherwise. Buggy prices are for one vehicle for up to 2 people. Pool access is subject to confirmation. Final availability and price are confirmed before booking.</p>
-<div class="cards">
-<article class="card">
-<img src="quad-group.jpg" alt="Quad biking in Agafay Desert" loading="lazy">
-<div class="card-content"><span class="tag">ADVENTURE + DINNER</span><h3>Quad + Camel + Dinner</h3><p>Enjoy a quad ride, a traditional camel experience and Moroccan dinner.</p><div class="features"><span>Quad: 1 hour</span><span>Camel ride</span><span>Dinner</span></div><p class="price-line"><strong>940 DH</strong> <small>/ person</small></p><a class="button dark book" data-package="Quad + Camel + Dinner" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="quad-ride.jpeg" alt="Quad tour in the rocky desert" loading="lazy">
-<div class="card-content"><span class="tag">ADVENTURE + LUNCH</span><h3>Quad + Camel + Lunch</h3><p>Combine a quad ride and camel ride with a delicious Moroccan lunch.</p><div class="features"><span>Quad: 1 hour</span><span>Camel ride</span><span>Lunch</span></div><p class="price-line"><strong>1,020 DH</strong> <small>/ person</small></p><a class="button dark book" data-package="Quad + Camel + Lunch" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="buggy-new.png" alt="Buggy adventure in Agafay Desert" loading="lazy">
-<div class="card-content"><span class="tag">OFF-ROAD ADVENTURE</span><h3>Buggy + Camel + Meal</h3><p>Choose a buggy adventure with a camel ride and lunch or dinner.</p><div class="features"><span>Buggy: 1 hour</span><span>Camel ride</span><span>Lunch or dinner</span></div><p class="price-line"><strong>From 2,500 DH</strong> <small>/ 2 people</small></p><a class="button dark book" data-package="Buggy + Camel + Lunch or Dinner" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="moroccan-lunch.jpg" alt="Traditional Moroccan food" loading="lazy">
-<div class="card-content"><span class="tag">MOROCCAN CUISINE</span><h3>Traditional Lunch</h3><p>Enjoy Moroccan food and hospitality during your desert visit.</p><div class="features"><span>Moroccan lunch</span><span>Pickup details confirmed with us</span></div><p class="price-line"><strong>Price on request</strong></p><a class="button dark book" data-package="Moroccan Lunch" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="desert-pool.jpg" alt="Swimming pool in the desert" loading="lazy">
-<div class="card-content"><span class="tag">RELAX & UNWIND</span><h3>Camel + Lunch + Pool</h3><p>Combine a camel ride and Moroccan lunch with pool access, subject to availability.</p><div class="features"><span>Camel ride</span><span>Lunch</span><span>Pool availability to confirm</span></div><p class="price-line"><strong>710 DH</strong> <small>/ person</small></p><a class="button dark book" data-package="Camel + Lunch + Pool" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="desert-evening.jpg" alt="Evening atmosphere in Agafay" loading="lazy">
-<div class="card-content"><span class="tag">DESERT EVENING</span><h3>Camel + Dinner</h3><p>Experience a camel ride followed by a traditional Moroccan dinner.</p><div class="features"><span>Camel ride</span><span>Dinner</span></div><p class="price-line"><strong>640 DH</strong> <small>/ person</small></p><a class="button dark book" data-package="Camel + Dinner" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-</div>
-</section>
+  <!-- PACKAGES -->
+  <section id="packs" class="listing">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">SPECIAL DESERT EXPERIENCES</p>
+        <h2>Our Adventure Packages</h2>
+      </div>
+      <p class="transport">✦ Ask us to confirm Marrakech pickup</p>
+    </div>
 
-<section id="activities" class="listing standalone">
-<div class="section-head"><div><p class="eyebrow">BUILD YOUR OWN EXPERIENCE</p><h2>Individual activities</h2></div><p class="transport">✦ Ask us about transport</p></div>
-<div class="cards three">
-<article class="card">
-<img src="quad-ride.jpeg" alt="Quad biking experience" loading="lazy">
-<div class="card-content"><span class="tag">ADVENTURE</span><h3>Quad Ride</h3><p>Ride through the striking landscapes of Agafay.</p><label for="quad-duration">Choose duration</label><select id="quad-duration"><option>1 hour — 480 DH/person</option><option>2 hours — 790 DH/person</option></select><p class="price-line"><strong>From 480 DH</strong> <small>/ person</small></p><a class="button dark book-select" data-base="Quad Ride" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="buggy-new.png" alt="Buggy tour in Agafay" loading="lazy">
-<div class="card-content"><span class="tag">OFF-ROAD</span><h3>Buggy Ride</h3><p>Explore the desert terrain on an exciting buggy ride.</p><label for="buggy-duration">Choose duration</label><select id="buggy-duration"><option>1 hour — 1,570 DH/buggy (up to 2 people)</option><option>2 hours — 2,800 DH/buggy (up to 2 people)</option></select><p class="price-line"><strong>From 1,570 DH</strong> <small>/ buggy for up to 2 people</small></p><a class="button dark book-select" data-base="Buggy Ride" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="camel-ride.jpg" alt="Camel ride in Agafay" loading="lazy">
-<div class="card-content"><span class="tag">TRADITION</span><h3>Camel Ride</h3><p>Discover a traditional way to experience the desert.</p><p class="price-line"><strong>330 DH</strong> <small>/ person</small></p><a class="button dark book" data-package="Camel Ride" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="moroccan-lunch.jpg" alt="Lunch and quad package" loading="lazy">
-<div class="card-content"><span class="tag">LUNCH + ADVENTURE</span><h3>Lunch + Quad</h3><p>Pair a quad ride with a traditional Moroccan lunch. Pool not included.</p><p class="price-line"><strong>Price on request</strong></p><a class="button dark book" data-package="Lunch + Quad" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="desert-evening.jpg" alt="Dinner and quad package" loading="lazy">
-<div class="card-content"><span class="tag">DINNER + ADVENTURE</span><h3>Dinner + Quad</h3><p>Enjoy a quad ride and a Moroccan dinner.</p><p class="price-line"><strong>790 DH</strong> <small>/ person</small></p><a class="button dark book" data-package="Dinner + Quad" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-<article class="card">
-<img src="desert-pool.jpg" alt="Desert pool experience" loading="lazy">
-<div class="card-content"><span class="tag">RELAXATION</span><h3>Lunch + Pool</h3><p>Enjoy lunch and pool access, subject to availability.</p><p class="price-line"><strong>560 DH</strong> <small>/ person</small></p><a class="button dark book" data-package="Lunch + Pool" href="#booking">REQUEST BOOKING ↗</a></div>
-</article>
-</div>
-</section>
+    <p class="pricing-note">
+      Special offer: 10% off the original prices shown below. Prices are per
+      person unless otherwise stated. Transport, pool availability and final
+      details must be confirmed before booking.
+    </p>
 
-<section id="booking" class="booking">
-<div class="booking-copy"><p class="eyebrow">LET'S PLAN YOUR VISIT</p><h2>Your desert adventure starts here.</h2><p>Choose your activity and send your booking request. Pay in cash when you arrive, after we confirm availability and the final price.</p><p class="free">✓ Ask us to confirm transport from Marrakech</p></div>
-<form id="booking-form">
-<label for="customer-name">Full name</label><input id="customer-name" type="text" autocomplete="name" placeholder="Your full name" required>
-<label for="customer-phone">WhatsApp / phone number</label><input id="customer-phone" type="tel" autocomplete="tel" placeholder="+34 ..." required>
-<label for="activity">Choose an experience</label>
-<select id="activity" required><option value="">Select an activity</option><option>Quad + Camel + Dinner</option><option>Quad + Camel + Lunch</option><option>Buggy + Camel + Lunch or Dinner</option><option>Moroccan Lunch</option><option>Quad Ride</option><option>Buggy Ride</option><option>Camel Ride</option><option>Lunch + Quad</option><option>Dinner + Quad</option><option>Camel + Dinner</option><option>Camel + Lunch + Pool</option><option>Lunch or Dinner + Pool</option></select>
-<div class="form-row"><div><label for="date">Preferred date</label><input id="date" type="date" required></div><div><label for="people">Number of people</label><input id="people" type="number" min="1" value="2" required></div></div>
-<label for="duration">Duration / options</label>
-<select id="duration"><option>Tell me available options</option><option>Quad — 30 minutes</option><option>Quad — 1 hour</option><option>Quad — 2 hours</option><option>Buggy — 1 hour</option><option>Buggy — 2 hours</option><option>Lunch, no pool</option><option>Lunch with pool</option><option>Dinner, no pool</option><option>Dinner with pool — confirm availability</option></select>
-<label for="notes">Pickup area or special requests</label><textarea id="notes" rows="3" placeholder="Your hotel, pickup area or questions"></textarea>
-<div class="cash-note"><strong>Payment method: Cash on Arrival</strong><span>No online payment is required. Pay in cash when you arrive, after your booking is confirmed.</span></div>
-<button class="button gold submit" type="submit">BOOK NOW — PAY ON ARRIVAL ↗</button>
-<small>Your booking request is sent to WhatsApp. It is not confirmed until we reply.</small>
-</form>
-</section>
+    <div class="cards three">
+      <article class="card">
+        <img src="quad-ride.jpeg" alt="Quad biking in Agafay Desert" loading="lazy">
+        <div class="card-content">
+          <span class="tag">QUICK ADVENTURE</span>
+          <h3>Quad 30 min + Camel</h3>
+          <p>A short guided quad ride combined with a traditional camel experience.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">280 DH</span><strong class="new-price">252 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Quad 30 min + Camel 20 min" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="quad-group.jpg" alt="Guided quad and camel adventure" loading="lazy">
+        <div class="card-content">
+          <span class="tag">POPULAR CHOICE</span>
+          <h3>Quad 1h + Camel</h3>
+          <p>Explore desert trails with a guide, followed by a camel ride.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">300 DH</span><strong class="new-price">270 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Quad 1 hour + Camel 20 min" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="moroccan-lunch.jpg" alt="Moroccan lunch with quad adventure" loading="lazy">
+        <div class="card-content">
+          <span class="tag">ADVENTURE + LUNCH</span>
+          <h3>Quad 1h + Lunch</h3>
+          <p>Enjoy a guided quad ride and a traditional Moroccan lunch.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">350 DH</span><strong class="new-price">315 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Quad 1 hour + Lunch" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="desert-evening.jpg" alt="Moroccan dinner in the desert" loading="lazy">
+        <div class="card-content">
+          <span class="tag">EVENING EXPERIENCE</span>
+          <h3>Quad 1h + Dinner</h3>
+          <p>Combine a quad adventure with a traditional Moroccan dinner.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">350 DH</span><strong class="new-price">315 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Quad 1 hour + Dinner" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="moroccan-lunch.jpg" alt="Quad camel and Moroccan lunch package" loading="lazy">
+        <div class="card-content">
+          <span class="tag">COMPLETE ADVENTURE</span>
+          <h3>Quad + Camel + Lunch</h3>
+          <p>A quad ride, camel experience and traditional Moroccan lunch.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">450 DH</span><strong class="new-price">405 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Quad 1 hour + Camel + Lunch" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="desert-evening.jpg" alt="Quad camel and dinner package" loading="lazy">
+        <div class="card-content">
+          <span class="tag">SUNSET & DINNER</span>
+          <h3>Quad + Camel + Dinner</h3>
+          <p>Discover the desert by quad and camel before a Moroccan dinner.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">450 DH</span><strong class="new-price">405 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Quad 1 hour + Camel + Dinner" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="camel-ride.jpg" alt="Camel ride and Moroccan lunch" loading="lazy">
+        <div class="card-content">
+          <span class="tag">CULTURE & CUISINE</span>
+          <h3>Camel + Lunch</h3>
+          <p>Enjoy a traditional camel ride and a Moroccan lunch.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">250 DH</span><strong class="new-price">225 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Camel 20 min + Lunch" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="desert-evening.jpg" alt="Camel ride and Moroccan dinner" loading="lazy">
+        <div class="card-content">
+          <span class="tag">DESERT EVENING</span>
+          <h3>Camel + Dinner</h3>
+          <p>A camel ride followed by a traditional Moroccan dinner.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">250 DH</span><strong class="new-price">225 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Camel 20 min + Dinner" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="desert-pool.jpg" alt="Swimming pool in Agafay Desert" loading="lazy">
+        <div class="card-content">
+          <span class="tag">RELAX & UNWIND</span>
+          <h3>Lunch + Pool</h3>
+          <p>Enjoy a Moroccan lunch and pool access, subject to confirmation.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">200 DH</span><strong class="new-price">180 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Lunch + Pool" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="desert-pool.jpg" alt="Pool and dinner experience in Agafay" loading="lazy">
+        <div class="card-content">
+          <span class="tag">DINNER & RELAXATION</span>
+          <h3>Dinner + Pool</h3>
+          <p>Enjoy dinner and pool access, subject to confirmation.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">200 DH</span><strong class="new-price">180 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Dinner + Pool" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="quad-ride.jpeg" alt="Two-hour quad and camel experience" loading="lazy">
+        <div class="card-content">
+          <span class="tag">EXTENDED ADVENTURE</span>
+          <h3>Quad 2h + Camel + Lunch</h3>
+          <p>A longer guided quad ride, a camel experience and Moroccan lunch.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">650 DH</span><strong class="new-price">585 DH</strong><small>/ person</small></div>
+          </div>
+          <a class="button dark book" data-package="Quad 2 hours + Camel + Lunch" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="buggy-new.png" alt="Buggy adventure in Agafay Desert" loading="lazy">
+        <div class="card-content">
+          <span class="tag">OFF-ROAD ADVENTURE</span>
+          <h3>Buggy + Camel + Dinner</h3>
+          <p>Enjoy an off-road buggy adventure and a camel ride before dinner.</p>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <div class="offer-prices"><span class="old-price">2,500 DH</span><strong class="new-price">2,250 DH</strong><small>/ 2 people</small></div>
+          </div>
+          <a class="button dark book" data-package="Buggy 1 hour + Camel + Dinner for 2 people" href="#booking">BOOK THIS PACK ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- INDIVIDUAL ACTIVITIES -->
+  <section id="activities" class="listing standalone">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">CHOOSE YOUR ADVENTURE</p>
+        <h2>Individual Activities</h2>
+      </div>
+    </div>
+
+    <div class="cards three">
+      <article class="card">
+        <img src="quad-ride.jpeg" alt="Quad biking in Agafay Desert" loading="lazy">
+        <div class="card-content">
+          <span class="tag">GUIDED DESERT RIDE</span>
+          <h3>Quad Biking</h3>
+          <p>
+            Before starting, your guide explains how to operate the quad and
+            reviews essential safety rules. Follow your guide through the
+            desert trails and enjoy scenic stops along the way.
+          </p>
+          <ul class="experience-details">
+            <li><strong>30 minutes:</strong> a 5-minute photo stop.</li>
+            <li><strong>1 hour:</strong> a 10-minute photo stop.</li>
+            <li><strong>2 hours:</strong> a photo stop and a Moroccan tea break lasting approximately 15–20 minutes.</li>
+          </ul>
+          <p>Photo or video assistance may be available when conditions allow and it is safe.</p>
+
+          <label class="choice-label" for="quad-duration">Choose your duration</label>
+          <select class="choice-select" id="quad-duration">
+            <option value="30 minutes">30 minutes — 200 DH/person</option>
+            <option value="1 hour">1 hour — 220 DH/person</option>
+            <option value="2 hours">2 hours — 380 DH/person</option>
+          </select>
+
+          <label class="choice-label" for="quad-sharing">Choose your quad option</label>
+          <select class="choice-select" id="quad-sharing">
+            <option value="1 person per quad">1 person per quad</option>
+            <option value="2 people sharing one quad">2 people sharing one quad</option>
+          </select>
+
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <p class="offer-note">Discounted prices shown in the selection above.</p>
+          </div>
+          <a class="button dark" id="quad-book-button" href="#booking">REQUEST BOOKING ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="buggy-new.png" alt="Buggy ride in Agafay Desert" loading="lazy">
+        <div class="card-content">
+          <span class="tag">OFF-ROAD ADVENTURE</span>
+          <h3>Buggy Ride</h3>
+          <p>
+            Explore the rocky desert terrain in a buggy. A guide will explain
+            the basic controls and safety instructions before departure.
+          </p>
+          <label class="choice-label" for="buggy-duration">Choose duration</label>
+          <select class="choice-select" id="buggy-duration">
+            <option value="1 hour">1 hour — ask us for the price</option>
+            <option value="2 hours">2 hours — ask us for the price</option>
+          </select>
+          <p class="offer-note">Buggy pricing is per vehicle for up to 2 people, subject to confirmation.</p>
+          <a class="button dark" id="buggy-book-button" href="#booking">REQUEST BOOKING ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="camel-ride.jpg" alt="Camel ride in Agafay Desert" loading="lazy">
+        <div class="card-content">
+          <span class="tag">TRADITIONAL EXPERIENCE</span>
+          <h3>Camel Ride</h3>
+          <p>Discover Agafay on a traditional camel ride with a local guide.</p>
+          <label class="choice-label" for="camel-duration">Choose duration</label>
+          <select class="choice-select" id="camel-duration">
+            <option value="20 minutes">20 minutes — 100 DH/person</option>
+            <option value="1 hour">1 hour — 150 DH/person</option>
+          </select>
+          <div class="offer-box">
+            <span class="offer-badge">SPECIAL OFFER · 10% OFF</span>
+            <p class="offer-note">20 minutes: 90 DH · 1 hour: 135 DH per person.</p>
+          </div>
+          <a class="button dark" id="camel-book-button" href="#booking">REQUEST BOOKING ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="moroccan-lunch.jpg" alt="Traditional Moroccan lunch" loading="lazy">
+        <div class="card-content">
+          <span class="tag">MOROCCAN CUISINE</span>
+          <h3>Traditional Lunch</h3>
+          <p>Enjoy traditional Moroccan dishes in a desert setting.</p>
+          <p class="offer-note">Lunch without pool: ask us to confirm the final price.</p>
+          <a class="button dark book" data-package="Traditional Moroccan Lunch" href="#booking">REQUEST BOOKING ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="desert-evening.jpg" alt="Moroccan dinner in Agafay" loading="lazy">
+        <div class="card-content">
+          <span class="tag">EVENING EXPERIENCE</span>
+          <h3>Dinner & Show</h3>
+          <p>Enjoy a Moroccan dinner and ask us about evening entertainment and show availability.</p>
+          <p class="offer-note">Dinner without pool: ask us to confirm the final price.</p>
+          <a class="button dark book" data-package="Moroccan Dinner and Show" href="#booking">REQUEST BOOKING ↗</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="desert-pool.jpg" alt="Swimming pool in Agafay Desert" loading="lazy">
+        <div class="card-content">
+          <span class="tag">RELAXATION</span>
+          <h3>Pool Access</h3>
+          <p>Combine your desert visit with a relaxing pool experience, subject to availability.</p>
+          <p class="offer-note">Please confirm pool access before booking.</p>
+          <a class="button dark book" data-package="Pool Access" href="#booking">REQUEST BOOKING ↗</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- BOOKING FORM -->
+  <section id="booking" class="booking">
+    <div class="booking-copy">
+      <p class="eyebrow">LET'S PLAN YOUR VISIT</p>
+      <h2>Your Desert Adventure Starts Here.</h2>
+      <p class="booking-intro">
+        Send us your preferred activity and date. We will confirm availability,
+        pickup arrangements and the final price before your booking is confirmed.
+      </p>
+      <p class="free">✓ Cash on Arrival, after confirmation</p>
+    </div>
+
+    <form id="booking-form" class="booking-form">
+      <label for="customer-name">Full name</label>
+      <input id="customer-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required>
+
+      <label for="customer-phone">WhatsApp / phone number</label>
+      <input id="customer-phone" name="phone" type="tel" autocomplete="tel" placeholder="+34 ..." required>
+
+      <label for="activity">Choose an experience</label>
+      <select id="activity" name="activity" required>
+        <option value="">Select an activity or package</option>
+        <option>Quad Ride — 30 Minutes</option>
+        <option>Quad Ride — 1 Hour</option>
+        <option>Quad Ride — 2 Hours</option>
+        <option>Buggy Ride — 1 Hour</option>
+        <option>Buggy Ride — 2 Hours</option>
+        <option>Camel Ride — 20 Minutes</option>
+        <option>Camel Ride — 1 Hour</option>
+        <option>Quad 30 min + Camel 20 min</option>
+        <option>Quad 1 hour + Camel 20 min</option>
+        <option>Quad 1 hour + Lunch</option>
+        <option>Quad 1 hour + Dinner</option>
+        <option>Quad 1 hour + Camel + Lunch</option>
+        <option>Quad 1 hour + Camel + Dinner</option>
+        <option>Camel 20 min + Lunch</option>
+        <option>Camel 20 min + Dinner</option>
+        <option>Lunch + Pool</option>
+        <option>Dinner + Pool</option>
+        <option>Quad 2 hours + Camel + Lunch</option>
+        <option>Buggy + Camel + Dinner for 2 people</option>
+        <option>Traditional Moroccan Lunch</option>
+        <option>Moroccan Dinner and Show</option>
+        <option>Pool Access</option>
+      </select>
+
+      <div class="form-row">
+        <div>
+          <label for="date">Preferred date</label>
+          <input id="date" name="date" type="date" required>
+        </div>
+        <div>
+          <label for="people">Number of people</label>
+          <input id="people" name="people" type="number" min="1" value="2" required>
+        </div>
+      </div>
+
+      <label for="duration">Duration / options</label>
+      <select id="duration" name="duration">
+        <option>Tell me available options</option>
+        <option>Quad — 30 minutes</option>
+        <option>Quad — 1 hour</option>
+        <option>Quad — 2 hours</option>
+        <option>Buggy — 1 hour</option>
+        <option>Buggy — 2 hours</option>
+        <option>Camel — 20 minutes</option>
+        <option>Camel — 1 hour</option>
+        <option>Lunch without pool</option>
+        <option>Lunch with pool — confirm availability</option>
+        <option>Dinner without pool</option>
+        <option>Dinner with pool — confirm availability</option>
+      </select>
+
+      <label for="quad-option">Quad seating, if applicable</label>
+      <select id="quad-option" name="quad-option">
+        <option>Not applicable</option>
+        <option>1 person per quad</option>
+        <option>2 people sharing one quad</option>
+      </select>
+
+      <label for="notes">Pickup area or special requests</label>
+      <textarea id="notes" name="notes" rows="3" placeholder="Hotel, pickup area or questions"></textarea>
+
+      <div class="cash-note">
+        <strong>Payment method: Cash on Arrival</strong>
+        <span>No online payment is required. Your request is not confirmed until we reply.</span>
+      </div>
+
+      <button class="button gold submit" type="submit">SEND BOOKING REQUEST ↗</button>
+      <small>Your request will open WhatsApp with the details you entered.</small>
+    </form>
+  </section>
 </main>
+
 <footer>
-<a class="brand" href="#home"><span class="monogram">SD</span><span>SULTANS <b>DESERT</b><small>MOROCCO EXPERIENCES</small></span></a>
-<p>Agafay Desert · Marrakech · Morocco</p>
-<p>Activities, desert adventures and Moroccan hospitality.</p>
-<p><a href="https://wa.me/212642251008">WhatsApp: +212 640140173</a> · <a href="mailto:sultansdesert@gmail.com">sultansdesert@gmail.com</a></p>
-<small>Prices are subject to confirmation when you book.</small>
+  <a class="brand" href="#home">
+    <span class="monogram">SD</span>
+    <span>SULTANS <b>DESERT</b><small>MOROCCO EXPERIENCES</small></span>
+  </a>
+  <p>Agafay Desert · Marrakech · Morocco</p>
+  <p>Desert adventures, Moroccan hospitality and unforgettable experiences.</p>
+  <p><a href="https://wa.me/212642251008">Contact us on WhatsApp</a></p>
+  <small>Prices, pickup arrangements and pool availability are confirmed before booking.</small>
 </footer>
+
 <script src="script.js"></script>
+
+<script>
+  // Pass the selected duration and seating option to the booking form.
+  function chooseBooking(activity, extra = "") {
+    const activityField = document.getElementById("activity");
+    const durationField = document.getElementById("duration");
+    const notesField = document.getElementById("notes");
+
+    if (activityField) activityField.value = activity;
+
+    if (extra && notesField) {
+      notesField.value = notesField.value
+        ? notesField.value + "\nSelected option: " + extra
+        : "Selected option: " + extra;
+    }
+  }
+
+  document.getElementById("quad-book-button")?.addEventListener("click", () => {
+    const duration = document.getElementById("quad-duration").value;
+    const sharing = document.getElementById("quad-sharing").value;
+    chooseBooking("Quad Ride — " + duration, sharing);
+  });
+
+  document.getElementById("buggy-book-button")?.addEventListener("click", () => {
+    const duration = document.getElementById("buggy-duration").value;
+    chooseBooking("Buggy Ride — " + duration);
+  });
+
+  document.getElementById("camel-book-button")?.addEventListener("click", () => {
+    const duration = document.getElementById("camel-duration").value;
+    chooseBooking("Camel Ride — " + duration);
+  });
+</script>
 </body>
 </html>
