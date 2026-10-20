@@ -1,413 +1,674 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f6f1">
-  <meta name="description" content="Discover Agafay Desert with Sultans Desert: quad biking, buggy adventures, camel rides and Moroccan food near Marrakech.">
-  <title>Sultans Desert | Agafay Desert Experiences</title>
-  <link rel="icon" type="image/png" href="favicon-32.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon-180.png">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#211a15">
+  <meta name="description" content="Discover Sultans Desert, Marrakech and Agafay Desert experiences.">
+  <title>About Us | Sultans Desert Morocco</title>
+  <link rel="icon" href="./favicon-32.png" type="image/png">
+
+  <style>
+    :root {
+      --sand: #c7a77b;
+      --dark: #211a15;
+      --brown: #49372a;
+      --cream: #fbf8f3;
+      --muted: #746b62;
+      --border: #e9e0d5;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+    a { color: inherit; }
+    img { max-width: 100%; }
+
+    .header {
+      min-height: 82px;
+      padding: 14px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo img {
+      width: 155px;
+      max-height: 58px;
+      object-fit: contain;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav a:hover { color: #a67d4d; }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .language {
+      max-width: 125px;
+      padding: 10px 8px;
+      border: 1px solid #ddd0bf;
+      border-radius: 4px;
+      background: white;
+      color: var(--dark);
+      font-size: 13px;
+    }
+
+    .book-button {
+      display: inline-block;
+      padding: 12px 16px;
+      border-radius: 4px;
+      background: var(--dark);
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .hero {
+      min-height: 460px;
+      padding: 75px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(20,16,12,.58), rgba(20,16,12,.45)),
+        url("./quad-hero.png") center 55% / cover no-repeat;
+    }
+
+    .hero-content { max-width: 820px; }
+
+    .eyebrow {
+      display: block;
+      margin-bottom: 15px;
+      color: var(--sand);
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      margin: 0 0 20px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(39px, 6vw, 70px);
+      line-height: 1.12;
+      font-weight: 500;
+    }
+
+    .hero p {
+      max-width: 670px;
+      margin: auto;
+      color: #f5eee6;
+      font-size: 17px;
+    }
+
+    .container {
+      width: min(1120px, 90%);
+      margin: auto;
+    }
+
+    .story { padding: 85px 0; }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .story-image {
+      width: 100%;
+      height: 440px;
+      display: block;
+      object-fit: cover;
+      border-radius: 7px;
+      box-shadow: 0 18px 40px #251b121a;
+    }
+
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 4vw, 43px);
+      line-height: 1.25;
+      font-weight: 500;
+    }
+
+    .story h2 { margin: 0 0 20px; }
+
+    .story p {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0 0 17px;
+    }
+
+    .values, .activities { padding: 75px 0; }
+
+    .values { background: #f0e8dc; }
+
+    .section-heading {
+      max-width: 720px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .section-heading h2 { margin: 0 0 14px; }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .values-grid, .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .value-card, .activity-card {
+      overflow: hidden;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+    }
+
+    .value-card { padding: 27px; }
+
+    .value-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      border-radius: 50%;
+      background: #ead8bf;
+      color: var(--brown);
+      font-size: 22px;
+    }
+
+    .value-card h3, .activity-card h3 {
+      margin: 0 0 10px;
+      color: var(--brown);
+      font-size: 20px;
+    }
+
+    .value-card p, .activity-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .activity-card {
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .activity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px #251b1217;
+    }
+
+    .activity-card img {
+      width: 100%;
+      height: 220px;
+      display: block;
+      object-fit: cover;
+      background: #e9dfd2;
+    }
+
+    .activity-content { padding: 22px; }
+
+    .cta {
+      padding: 75px 20px;
+      background: var(--dark);
+      color: white;
+      text-align: center;
+    }
+
+    .cta h2 { margin: 0 0 15px; color: white; }
+
+    .cta p {
+      max-width: 660px;
+      margin: 0 auto 25px;
+      color: #ded2c5;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 13px 22px;
+      border: 1px solid var(--sand);
+      border-radius: 4px;
+      background: var(--sand);
+      color: #211a15;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .cta-button.secondary {
+      color: white;
+      background: transparent;
+      border-color: #d8c6b1;
+    }
+
+    .footer {
+      padding: 25px 15px;
+      text-align: center;
+      background: #17120f;
+      color: #cfc2b5;
+      font-size: 13px;
+    }
+
+    .footer p { margin: 5px 0; }
+    .footer a { color: var(--sand); text-decoration: none; }
+
+    /* Arabic layout */
+    html[dir="rtl"] body {
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    html[dir="rtl"] .eyebrow {
+      letter-spacing: 0;
+    }
+
+    html[dir="rtl"] .story,
+    html[dir="rtl"] .value-card,
+    html[dir="rtl"] .activity-content {
+      text-align: right;
+    }
+
+    @media (max-width: 900px) {
+      .header { flex-wrap: wrap; justify-content: center; }
+      .story-grid { gap: 30px; }
+      .values-grid, .activities-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 650px) {
+      .header { padding: 15px; }
+      .nav { gap: 12px; }
+      .header-right { flex-wrap: wrap; justify-content: center; }
+      .story-grid { grid-template-columns: 1fr; }
+      .story-image { height: 300px; }
+      .values-grid, .activities-grid { grid-template-columns: 1fr; }
+      .hero { min-height: 380px; }
+      .story, .activities, .values { padding: 55px 0; }
+      .cta-buttons { flex-direction: column; max-width: 330px; margin: auto; }
+    }
+  </style>
 </head>
+
 <body>
+  <header class="header">
+    <a class="logo" href="./index.html" aria-label="Sultans Desert Home">
+      <img src="./logo-header.png" alt="Sultans Desert"
+           onerror="this.onerror=null;this.src='./logo.png';">
+    </a>
 
-<header class="top">
-  <a class="brand" href="index.html" aria-label="Sultans Desert home">
-    <img class="brand-logo" src="./logo-header.png" alt="Sultans Desert logo"
-      onerror="this.onerror=null;this.src='./logo.png';">
-  </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="./index.html" data-i18n="home">Home</a>
+      <a href="./index.html#packs" data-i18n="packages">Packages</a>
+      <a href="./index.html#activities" data-i18n="activities">Activities</a>
+      <a href="./about.html" data-i18n="about">About Us</a>
+    </nav>
 
-  <nav aria-label="Main navigation">
-    <a href="index.html">Home</a>
-    <a href="#packs">Packages</a>
-    <a href="#activities">Activities</a>
-    <a href="about.html">About Us</a>
-    <a href="#booking">Book now</a>
-  </nav>
-
-  <a class="smallbook" href="#booking">BOOK NOW ↗</a>
-</header>
-
-<main>
-  <section class="hero" id="home">
-    <img class="hero-photo" src="./quad-hero.png"
-      alt="Quad biking in Agafay Desert at sunset"
-      fetchpriority="high"
-      onerror="this.onerror=null;this.src='./agafay-cover.png';">
-
-    <div class="shade"></div>
-
-    <div class="hero-copy">
-      <p class="eyebrow">MARRAKECH · AGAFAY DESERT · MOROCCO</p>
-      <h1>SULTANS<br><i>DESERT</i></h1>
-      <p class="hero-tagline">Your Desert Adventure Starts Here.</p>
-      <p>Discover quad biking, buggy adventures, camel rides and authentic Moroccan hospitality in the Agafay Desert.</p>
-
-      <div class="hero-actions">
-        <a class="button gold" href="#packs">EXPLORE EXPERIENCES ↗</a>
-        <a class="button outline" href="#booking">BOOK YOUR ADVENTURE</a>
-      </div>
-
-      <div class="hero-highlights">
-        <span>✓ Guided desert adventures</span>
-        <span>✓ Moroccan experiences</span>
-        <span>✓ Easy booking requests</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="intro">
-    <p class="eyebrow">YOUR MOROCCAN ADVENTURE</p>
-    <h2>Discover the desert.<br><i>Make memories that last.</i></h2>
-    <p>Explore Agafay through outdoor adventures, traditional Moroccan food and unforgettable moments with a local guide.</p>
-  </section>
-
-  <section id="packs" class="listing">
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">SPECIAL DESERT EXPERIENCES</p>
-        <h2>Our Adventure Packages</h2>
-      </div>
-      <p class="transport">✦ Ask us to confirm Marrakech pickup</p>
-    </div>
-
-    <p class="pricing-note">Special offer: 10% off the original prices shown. Prices are per person unless stated otherwise. Transport, pool availability and final details must be confirmed before booking.</p>
-
-    <div class="cards">
-      <article class="card">
-        <img src="quad-ride.jpeg" alt="Quad biking in Agafay Desert" loading="lazy">
-        <div class="card-content">
-          <span class="tag">QUICK ADVENTURE</span>
-          <h3>Quad 30 min + Camel</h3>
-          <p>A guided quad ride with a traditional camel experience.</p>
-          <div class="price"><del>280 DH</del><strong>252 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Quad 30 min + Camel 20 min">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="quad-group.jpg" alt="Guided quad ride" loading="lazy">
-        <div class="card-content">
-          <span class="tag">POPULAR CHOICE</span>
-          <h3>Quad 1h + Camel</h3>
-          <p>Explore desert trails with a guide, followed by a camel ride.</p>
-          <div class="price"><del>300 DH</del><strong>270 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Quad 1 hour + Camel 20 min">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="moroccan-lunch.jpg" alt="Moroccan lunch" loading="lazy">
-        <div class="card-content">
-          <span class="tag">ADVENTURE + LUNCH</span>
-          <h3>Quad 1h + Lunch</h3>
-          <p>A guided quad ride and traditional Moroccan lunch.</p>
-          <div class="price"><del>350 DH</del><strong>315 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Quad 1 hour + Lunch">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="desert-evening.jpg" alt="Moroccan dinner in the desert" loading="lazy">
-        <div class="card-content">
-          <span class="tag">EVENING EXPERIENCE</span>
-          <h3>Quad 1h + Dinner</h3>
-          <p>Combine a quad adventure with a traditional Moroccan dinner.</p>
-          <div class="price"><del>350 DH</del><strong>315 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Quad 1 hour + Dinner">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="moroccan-lunch.jpg" alt="Quad, camel and lunch" loading="lazy">
-        <div class="card-content">
-          <span class="tag">COMPLETE ADVENTURE</span>
-          <h3>Quad + Camel + Lunch</h3>
-          <p>Quad ride, camel experience and Moroccan lunch.</p>
-          <div class="price"><del>450 DH</del><strong>405 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Quad 1 hour + Camel + Lunch">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="desert-evening.jpg" alt="Quad, camel and dinner" loading="lazy">
-        <div class="card-content">
-          <span class="tag">SUNSET & DINNER</span>
-          <h3>Quad + Camel + Dinner</h3>
-          <p>Discover the desert before a traditional Moroccan dinner.</p>
-          <div class="price"><del>450 DH</del><strong>405 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Quad 1 hour + Camel + Dinner">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="camel-ride.jpg" alt="Camel ride" loading="lazy">
-        <div class="card-content">
-          <span class="tag">CULTURE & CUISINE</span>
-          <h3>Camel + Lunch</h3>
-          <p>A traditional camel ride and Moroccan lunch.</p>
-          <div class="price"><del>250 DH</del><strong>225 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Camel 20 min + Lunch">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="desert-evening.jpg" alt="Camel ride and dinner" loading="lazy">
-        <div class="card-content">
-          <span class="tag">DESERT EVENING</span>
-          <h3>Camel + Dinner</h3>
-          <p>A camel ride followed by a traditional Moroccan dinner.</p>
-          <div class="price"><del>250 DH</del><strong>225 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Camel 20 min + Dinner">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="desert-pool.jpg" alt="Swimming pool in Agafay" loading="lazy">
-        <div class="card-content">
-          <span class="tag">RELAX & UNWIND</span>
-          <h3>Lunch + Pool</h3>
-          <p>Moroccan lunch and pool access, subject to confirmation.</p>
-          <div class="price"><del>200 DH</del><strong>180 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Lunch + Pool">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="desert-pool.jpg" alt="Pool and dinner" loading="lazy">
-        <div class="card-content">
-          <span class="tag">DINNER & RELAXATION</span>
-          <h3>Dinner + Pool</h3>
-          <p>Dinner and pool access, subject to confirmation.</p>
-          <div class="price"><del>200 DH</del><strong>180 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Dinner + Pool">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="quad-ride.jpeg" alt="Extended quad adventure" loading="lazy">
-        <div class="card-content">
-          <span class="tag">EXTENDED ADVENTURE</span>
-          <h3>Quad 2h + Camel + Lunch</h3>
-          <p>A longer quad ride, camel experience and Moroccan lunch.</p>
-          <div class="price"><del>650 DH</del><strong>585 DH</strong><small>/ person</small></div>
-          <button class="button dark book" data-package="Quad 2 hours + Camel + Lunch">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="buggy-new.png" alt="Buggy in Agafay Desert" loading="lazy">
-        <div class="card-content">
-          <span class="tag">OFF-ROAD ADVENTURE</span>
-          <h3>Buggy + Camel + Dinner</h3>
-          <p>Buggy adventure, camel ride and dinner for two people.</p>
-          <div class="price"><del>2,500 DH</del><strong>2,250 DH</strong><small>/ 2 people</small></div>
-          <button class="button dark book" data-package="Buggy 1 hour + Camel + Dinner for 2 people">BOOK THIS PACK ↗</button>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="activities" class="listing standalone">
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">CHOOSE YOUR ADVENTURE</p>
-        <h2>Individual Activities</h2>
-      </div>
-    </div>
-
-    <div class="cards">
-      <article class="card">
-        <img src="quad-ride.jpeg" alt="Quad biking" loading="lazy">
-        <div class="card-content">
-          <span class="tag">GUIDED DESERT RIDE</span>
-          <h3>Quad Biking</h3>
-          <p>Guided rides with a safety briefing and scenic stops.</p>
-          <label for="quad-duration">Choose duration</label>
-          <select id="quad-duration">
-            <option value="30 minutes — 180 DH/person">30 minutes — 180 DH/person (was 200 DH)</option>
-            <option value="1 hour — 198 DH/person">1 hour — 198 DH/person (was 220 DH)</option>
-            <option value="2 hours — 342 DH/person">2 hours — 342 DH/person (was 380 DH)</option>
-          </select>
-          <label for="quad-sharing">Quad option</label>
-          <select id="quad-sharing">
-            <option>1 person per quad</option>
-            <option>2 people sharing one quad — confirm price</option>
-          </select>
-          <button class="button dark" id="quad-book-button">REQUEST BOOKING ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="buggy-new.png" alt="Buggy ride" loading="lazy">
-        <div class="card-content">
-          <span class="tag">OFF-ROAD ADVENTURE</span>
-          <h3>Buggy Ride</h3>
-          <p>Explore rocky desert terrain in a buggy with a local guide.</p>
-          <label for="buggy-duration">Choose duration</label>
-          <select id="buggy-duration">
-            <option>1 hour — confirm price</option>
-            <option>2 hours — confirm price</option>
-          </select>
-          <p class="note">Buggy pricing is per vehicle for up to 2 people, subject to confirmation.</p>
-          <button class="button dark" id="buggy-book-button">REQUEST BOOKING ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="camel-ride.jpg" alt="Camel ride" loading="lazy">
-        <div class="card-content">
-          <span class="tag">TRADITIONAL EXPERIENCE</span>
-          <h3>Camel Ride</h3>
-          <p>Discover Agafay on a traditional camel ride with a local guide.</p>
-          <label for="camel-duration">Choose duration</label>
-          <select id="camel-duration">
-            <option>20 minutes — 90 DH/person (was 100 DH)</option>
-            <option>1 hour — 135 DH/person (was 150 DH)</option>
-          </select>
-          <button class="button dark" id="camel-book-button">REQUEST BOOKING ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="moroccan-lunch.jpg" alt="Traditional lunch" loading="lazy">
-        <div class="card-content">
-          <span class="tag">MOROCCAN CUISINE</span>
-          <h3>Traditional Lunch</h3>
-          <p>Enjoy Moroccan dishes in a desert setting.</p>
-          <button class="button dark book" data-package="Traditional Moroccan Lunch">REQUEST BOOKING ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="desert-evening.jpg" alt="Dinner in Agafay" loading="lazy">
-        <div class="card-content">
-          <span class="tag">EVENING EXPERIENCE</span>
-          <h3>Dinner & Show</h3>
-          <p>Ask us to confirm dinner, entertainment and show availability.</p>
-          <button class="button dark book" data-package="Moroccan Dinner and Show">REQUEST BOOKING ↗</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <img src="desert-pool.jpg" alt="Pool access" loading="lazy">
-        <div class="card-content">
-          <span class="tag">RELAXATION</span>
-          <h3>Pool Access</h3>
-          <p>Pool access is subject to confirmation before booking.</p>
-          <button class="button dark book" data-package="Pool Access">REQUEST BOOKING ↗</button>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="booking" class="booking">
-    <div class="booking-copy">
-      <p class="eyebrow">LET'S PLAN YOUR VISIT</p>
-      <h2>Your Desert Adventure Starts Here.</h2>
-      <p>Send your preferred activity and date. We will confirm availability, pickup arrangements and the final price before confirming the booking.</p>
-      <p class="free">✓ Cash on Arrival, after confirmation</p>
-      <p class="contact-email">Email: <a href="mailto:sultansdesert@gmail.com">sultansdesert@gmail.com</a></p>
-      <p>Instagram: <a href="https://www.instagram.com/sultansdesert/" target="_blank" rel="noopener noreferrer">@sultansdesert ↗</a></p>
-    </div>
-
-    <form id="booking-form" class="booking-form">
-      <label for="customer-name">Full name</label>
-      <input id="customer-name" name="name" type="text" autocomplete="name" placeholder="Your full name" required>
-
-      <label for="customer-phone">WhatsApp / phone number</label>
-      <input id="customer-phone" name="phone" type="tel" autocomplete="tel" placeholder="+34 ..." required>
-
-      <label for="activity">Choose an experience</label>
-      <select id="activity" name="activity" required>
-        <option value="">Select an activity or package</option>
-        <option>Quad Ride — 30 Minutes</option>
-        <option>Quad Ride — 1 Hour</option>
-        <option>Quad Ride — 2 Hours</option>
-        <option>Buggy Ride — 1 Hour</option>
-        <option>Buggy Ride — 2 Hours</option>
-        <option>Camel Ride — 20 Minutes</option>
-        <option>Camel Ride — 1 Hour</option>
-        <option>Quad 30 min + Camel 20 min</option>
-        <option>Quad 1 hour + Camel 20 min</option>
-        <option>Quad 1 hour + Lunch</option>
-        <option>Quad 1 hour + Dinner</option>
-        <option>Quad 1 hour + Camel + Lunch</option>
-        <option>Quad 1 hour + Camel + Dinner</option>
-        <option>Camel 20 min + Lunch</option>
-        <option>Camel 20 min + Dinner</option>
-        <option>Lunch + Pool</option>
-        <option>Dinner + Pool</option>
-        <option>Quad 2 hours + Camel + Lunch</option>
-        <option>Buggy + Camel + Dinner for 2 people</option>
-        <option>Traditional Moroccan Lunch</option>
-        <option>Moroccan Dinner and Show</option>
-        <option>Pool Access</option>
+    <div class="header-right">
+      <select class="language" id="language" aria-label="Choose language">
+        <option value="en">🇬🇧 English</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="ar">🇲🇦 العربية</option>
       </select>
+      <a class="book-button" href="./index.html#booking" data-i18n="book">BOOK NOW ↗</a>
+    </div>
+  </header>
 
-      <div class="form-row">
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow" data-i18n="welcome">WELCOME TO MOROCCO</span>
+        <h1 data-i18n="heroTitle">Discover the Soul of the Desert</h1>
+        <p data-i18n="heroText">
+          Authentic Moroccan hospitality, unforgettable adventures,
+          and special moments in Marrakech and the Agafay Desert.
+        </p>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="container story-grid">
+        <img class="story-image" src="./quad-group.jpg"
+             alt="Desert adventure in Morocco" loading="lazy"
+             onerror="this.onerror=null;this.src='./quad-hero.png';">
+
         <div>
-          <label for="date">Preferred date</label>
-          <input id="date" name="date" type="date" required>
+          <span class="eyebrow" data-i18n="ourStory">OUR STORY</span>
+          <h2 data-i18n="storyTitle">More Than a Trip, It's an Experience</h2>
+          <p data-i18n="story1">
+            Welcome to Sultans Desert, your gateway to discovering the
+            beauty, culture, and adventure of Morocco.
+          </p>
+          <p data-i18n="story2">
+            From exciting quad and buggy rides to traditional camel rides,
+            Moroccan food, and beautiful desert evenings, there is
+            something for every kind of traveller.
+          </p>
+          <p data-i18n="story3">
+            Our aim is to make your experience enjoyable and memorable
+            while sharing the welcoming spirit of Morocco.
+          </p>
         </div>
-        <div>
-          <label for="people">Number of people</label>
-          <input id="people" name="people" type="number" min="1" value="2" required>
+      </div>
+    </section>
+
+    <section class="values">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow" data-i18n="whyUs">WHY SULTANS DESERT</span>
+          <h2 data-i18n="valuesTitle">Experiences Made for You</h2>
+          <p data-i18n="valuesIntro">
+            Adventure, local culture, and Moroccan hospitality come
+            together to make your visit special.
+          </p>
+        </div>
+
+        <div class="values-grid">
+          <article class="value-card">
+            <div class="value-icon">✦</div>
+            <h3 data-i18n="value1Title">Authentic Morocco</h3>
+            <p data-i18n="value1Text">
+              Discover local traditions, Moroccan flavours, and the
+              unique atmosphere of the desert.
+            </p>
+          </article>
+
+          <article class="value-card">
+            <div class="value-icon">◆</div>
+            <h3 data-i18n="value2Title">Adventure & Discovery</h3>
+            <p data-i18n="value2Text">
+              Explore desert trails, enjoy outdoor activities, and
+              create memories with family and friends.
+            </p>
+          </article>
+
+          <article class="value-card">
+            <div class="value-icon">♡</div>
+            <h3 data-i18n="value3Title">Personal Attention</h3>
+            <p data-i18n="value3Text">
+              We aim to make planning simple and provide clear
+              information before your experience.
+            </p>
+          </article>
         </div>
       </div>
+    </section>
 
-      <label for="duration">Duration / options</label>
-      <select id="duration" name="duration">
-        <option>Tell me available options</option>
-        <option>Quad — 30 minutes</option>
-        <option>Quad — 1 hour</option>
-        <option>Quad — 2 hours</option>
-        <option>Buggy — 1 hour</option>
-        <option>Buggy — 2 hours</option>
-        <option>Camel — 20 minutes</option>
-        <option>Camel — 1 hour</option>
-        <option>Lunch without pool</option>
-        <option>Lunch with pool — confirm availability</option>
-        <option>Dinner without pool</option>
-        <option>Dinner with pool — confirm availability</option>
-      </select>
+    <section class="activities">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow" data-i18n="explore">EXPLORE WITH US</span>
+          <h2 data-i18n="activitiesTitle">Find Your Desert Experience</h2>
+          <p data-i18n="activitiesIntro">
+            From adrenaline-filled adventures to relaxing moments,
+            discover experiences around Marrakech and Agafay.
+          </p>
+        </div>
 
-      <label for="notes">Pickup area or special requests</label>
-      <textarea id="notes" name="notes" rows="3" placeholder="Hotel, pickup area or questions"></textarea>
+        <div class="activities-grid">
+          <article class="activity-card">
+            <img src="./quad-ride.jpeg" alt="Quad biking" loading="lazy"
+                 onerror="this.onerror=null;this.src='./quad-hero.png';">
+            <div class="activity-content">
+              <h3 data-i18n="quadTitle">Quad Biking</h3>
+              <p data-i18n="quadText">Explore desert trails and enjoy an exciting ride through Agafay.</p>
+            </div>
+          </article>
 
-      <div class="cash-note">
-        <strong>Payment method: Cash on Arrival</strong>
-        <span>No online payment is required. Your request is not confirmed until we reply.</span>
+          <article class="activity-card">
+            <img src="./buggy-new.png" alt="Buggy adventure" loading="lazy"
+                 onerror="this.onerror=null;this.src='./buggy-sunset.jpeg';">
+            <div class="activity-content">
+              <h3 data-i18n="buggyTitle">Buggy Adventures</h3>
+              <p data-i18n="buggyText">Discover the open desert scenery on an adventurous buggy experience.</p>
+            </div>
+          </article>
+
+          <article class="activity-card">
+            <img src="./camel-ride.jpg" alt="Camel ride" loading="lazy"
+                 onerror="this.onerror=null;this.src='./camel-desert.jpg';">
+            <div class="activity-content">
+              <h3 data-i18n="camelTitle">Camel Rides</h3>
+              <p data-i18n="camelText">Enjoy a traditional camel ride and the peaceful atmosphere of the desert.</p>
+            </div>
+          </article>
+
+          <article class="activity-card">
+            <img src="./moroccan-lunch.jpg" alt="Moroccan food" loading="lazy">
+            <div class="activity-content">
+              <h3 data-i18n="foodTitle">Moroccan Cuisine</h3>
+              <p data-i18n="foodText">Taste traditional Moroccan dishes and experience local hospitality.</p>
+            </div>
+          </article>
+
+          <article class="activity-card">
+            <img src="./desert-evening.jpg" alt="Desert evening" loading="lazy">
+            <div class="activity-content">
+              <h3 data-i18n="eveningTitle">Desert Evenings</h3>
+              <p data-i18n="eveningText">Enjoy the atmosphere of the desert as the sun sets over Morocco.</p>
+            </div>
+          </article>
+
+          <article class="activity-card">
+            <img src="./desert-pool.jpg" alt="Desert pool" loading="lazy">
+            <div class="activity-content">
+              <h3 data-i18n="poolTitle">Relax & Unwind</h3>
+              <p data-i18n="poolText">Add a relaxing moment to your adventure when pool access is available.</p>
+            </div>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <button class="button gold submit" type="submit">SEND BOOKING REQUEST ↗</button>
-      <p class="note">Choose WhatsApp or email after filling the form. Your email app may open for email requests; you must press Send.</p>
+    <section class="cta">
+      <span class="eyebrow" data-i18n="startAdventure">YOUR ADVENTURE STARTS HERE</span>
+      <h2 data-i18n="ctaTitle">Ready to Explore Morocco?</h2>
+      <p data-i18n="ctaText">
+        Discover our packages and find the right experience for your trip.
+        Contact us if you need help planning your visit.
+      </p>
 
-      <div class="booking-actions">
-        <button type="button" class="button dark" id="send-whatsapp">SEND BY WHATSAPP</button>
-        <button type="button" class="button email-button" id="send-email">SEND BY EMAIL</button>
+      <div class="cta-buttons">
+        <a class="cta-button" href="./index.html#packs" data-i18n="explorePackages">Explore Packages</a>
+        <a class="cta-button secondary"
+           href="https://www.instagram.com/sultansdesert/"
+           target="_blank" rel="noopener noreferrer"
+           data-i18n="instagram">Follow Us on Instagram</a>
+        <a class="cta-button secondary"
+           href="mailto:sultansdesert@gmail.com" data-i18n="contact">Contact Us</a>
       </div>
-    </form>
-  </section>
-</main>
+    </section>
+  </main>
 
-<footer>
-  <a class="brand footer-brand" href="index.html">
-    <img class="brand-logo" src="./logo-header.png" alt="Sultans Desert logo"
-      onerror="this.onerror=null;this.src='./logo.png';">
-  </a>
+  <footer class="footer">
+    <p>© <span id="year">2026</span> Sultans Desert Morocco. <span data-i18n="rights">All rights reserved.</span></p>
+    <p>
+      Marrakech & Agafay Desert, Morocco ·
+      <a href="https://www.instagram.com/sultansdesert/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      · <a href="mailto:sultansdesert@gmail.com" data-i18n="emailUs">Email Us</a>
+    </p>
+    <p><a href="./index.html" data-i18n="backHome">Back to Home</a></p>
+  </footer>
 
-  <p>Agafay Desert · Marrakech · Morocco</p>
-  <p>Desert adventures and Moroccan hospitality.</p>
-  <p><a href="mailto:sultansdesert@gmail.com">sultansdesert@gmail.com</a></p>
-  <p><a id="footer-whatsapp" href="#booking">WhatsApp booking</a></p>
-  <p><a href="https://www.instagram.com/sultansdesert/" target="_blank" rel="noopener noreferrer">Instagram: @sultansdesert ↗</a></p>
-  <p><a href="about.html">About Us ↗</a></p>
-  <small>Prices, pickup arrangements and pool availability are confirmed before booking.</small>
-</footer>
+  <script>
+    const translations = {
+      en: {
+        home:"Home", packages:"Packages", activities:"Activities", about:"About Us", book:"BOOK NOW ↗",
+        welcome:"WELCOME TO MOROCCO", heroTitle:"Discover the Soul of the Desert",
+        heroText:"Authentic Moroccan hospitality, unforgettable adventures, and special moments in Marrakech and the Agafay Desert.",
+        ourStory:"OUR STORY", storyTitle:"More Than a Trip, It's an Experience",
+        story1:"Welcome to Sultans Desert, your gateway to discovering the beauty, culture, and adventure of Morocco. We help visitors explore Marrakech and the Agafay Desert through memorable local experiences.",
+        story2:"From exciting quad and buggy rides to traditional camel rides, Moroccan food, and beautiful desert evenings, there is something for every kind of traveller.",
+        story3:"Our aim is to make your experience enjoyable and memorable while sharing the welcoming spirit of Morocco.",
+        whyUs:"WHY SULTANS DESERT", valuesTitle:"Experiences Made for You",
+        valuesIntro:"Adventure, local culture, and Moroccan hospitality come together to make your visit special.",
+        value1Title:"Authentic Morocco", value1Text:"Discover local traditions, Moroccan flavours, and the unique atmosphere of the desert.",
+        value2Title:"Adventure & Discovery", value2Text:"Explore desert trails, enjoy outdoor activities, and create memories with family and friends.",
+        value3Title:"Personal Attention", value3Text:"We aim to make planning simple and provide clear information before your experience.",
+        explore:"EXPLORE WITH US", activitiesTitle:"Find Your Desert Experience",
+        activitiesIntro:"From adrenaline-filled adventures to relaxing moments, discover experiences around Marrakech and Agafay.",
+        quadTitle:"Quad Biking", quadText:"Explore desert trails and enjoy an exciting ride through Agafay.",
+        buggyTitle:"Buggy Adventures", buggyText:"Discover the open desert scenery on an adventurous buggy experience.",
+        camelTitle:"Camel Rides", camelText:"Enjoy a traditional camel ride and the peaceful atmosphere of the desert.",
+        foodTitle:"Moroccan Cuisine", foodText:"Taste traditional Moroccan dishes and experience local hospitality.",
+        eveningTitle:"Desert Evenings", eveningText:"Enjoy the atmosphere of the desert as the sun sets over Morocco.",
+        poolTitle:"Relax & Unwind", poolText:"Add a relaxing moment to your adventure when pool access is available.",
+        startAdventure:"YOUR ADVENTURE STARTS HERE", ctaTitle:"Ready to Explore Morocco?",
+        ctaText:"Discover our packages and find the right experience for your trip. Contact us if you need help planning your visit.",
+        explorePackages:"Explore Packages", instagram:"Follow Us on Instagram", contact:"Contact Us",
+        rights:"All rights reserved.", emailUs:"Email Us", backHome:"Back to Home"
+      },
 
-<script src="script.js"></script>
-</body>
-</html>
+      es: {
+        home:"Inicio", packages:"Paquetes", activities:"Actividades", about:"Sobre nosotros", book:"RESERVAR ↗",
+        welcome:"BIENVENIDO A MARRUECOS", heroTitle:"Descubre el alma del desierto",
+        heroText:"Hospitalidad marroquí auténtica, aventuras inolvidables y momentos especiales en Marrakech y el desierto de Agafay.",
+        ourStory:"NUESTRA HISTORIA", storyTitle:"Mucho más que un viaje: una experiencia",
+        story1:"Bienvenido a Sultans Desert, tu puerta de entrada a la belleza, la cultura y la aventura de Marruecos. Te ayudamos a descubrir Marrakech y el desierto de Agafay a través de experiencias locales inolvidables.",
+        story2:"Desde emocionantes rutas en quad y buggy hasta paseos tradicionales en camello, gastronomía marroquí y bonitas veladas en el desierto, hay experiencias para todos.",
+        story3:"Nuestro objetivo es ofrecerte una experiencia agradable e inolvidable y compartir contigo la hospitalidad de Marruecos.",
+        whyUs:"POR QUÉ SULTANS DESERT", valuesTitle:"Experiencias pensadas para ti",
+        valuesIntro:"Aventura, cultura local y hospitalidad marroquí se unen para hacer especial tu visita.",
+        value1Title:"Marruecos auténtico", value1Text:"Descubre las tradiciones locales, los sabores marroquíes y el ambiente único del desierto.",
+        value2Title:"Aventura y descubrimiento", value2Text:"Explora rutas del desierto, disfruta de actividades al aire libre y crea recuerdos con tus seres queridos.",
+        value3Title:"Atención personalizada", value3Text:"Queremos que organizar tu experiencia sea sencillo y que recibas información clara antes de tu actividad.",
+        explore:"EXPLORA CON NOSOTROS", activitiesTitle:"Encuentra tu experiencia en el desierto",
+        activitiesIntro:"Desde aventuras llenas de adrenalina hasta momentos de relax, descubre experiencias en Marrakech y Agafay.",
+        quadTitle:"Ruta en quad", quadText:"Explora los senderos del desierto y disfruta de una emocionante ruta por Agafay.",
+        buggyTitle:"Aventuras en buggy", buggyText:"Descubre los paisajes abiertos del desierto con una emocionante aventura en buggy.",
+        camelTitle:"Paseos en camello", camelText:"Disfruta de un paseo tradicional en camello y de la tranquilidad del desierto.",
+        foodTitle:"Gastronomía marroquí", foodText:"Prueba platos tradicionales marroquíes y disfruta de la hospitalidad local.",
+        eveningTitle:"Atardeceres en el desierto", eveningText:"Disfruta del ambiente del desierto mientras el sol se pone sobre Marruecos.",
+        poolTitle:"Relájate y desconecta", poolText:"Añade un momento de relax a tu aventura cuando haya acceso a la piscina.",
+        startAdventure:"TU AVENTURA EMPIEZA AQUÍ", ctaTitle:"¿Listo para descubrir Marruecos?",
+        ctaText:"Descubre nuestros paquetes y elige la experiencia ideal para tu viaje. Contáctanos si necesitas ayuda para organizar tu visita.",
+        explorePackages:"Ver paquetes", instagram:"Síguenos en Instagram", contact:"Contáctanos",
+        rights:"Todos los derechos reservados.", emailUs:"Escríbenos", backHome:"Volver al inicio"
+      },
+
+      fr: {
+        home:"Accueil", packages:"Forfaits", activities:"Activités", about:"À propos", book:"RÉSERVER ↗",
+        welcome:"BIENVENUE AU MAROC", heroTitle:"Découvrez l'âme du désert",
+        heroText:"Une hospitalité marocaine authentique, des aventures inoubliables et des moments privilégiés à Marrakech et dans le désert d'Agafay.",
+        ourStory:"NOTRE HISTOIRE", storyTitle:"Bien plus qu'un voyage : une expérience",
+        story1:"Bienvenue chez Sultans Desert, votre porte d'entrée vers la beauté, la culture et l'aventure du Maroc. Nous vous aidons à découvrir Marrakech et le désert d'Agafay à travers des expériences locales mémorables.",
+        story2:"Des sorties en quad et en buggy aux balades traditionnelles à dos de chameau, en passant par la cuisine marocaine et les soirées dans le désert, chacun peut trouver son bonheur.",
+        story3:"Notre objectif est de vous offrir une expérience agréable et inoubliable tout en partageant avec vous l'hospitalité marocaine.",
+        whyUs:"POURQUOI SULTANS DESERT", valuesTitle:"Des expériences faites pour vous",
+        valuesIntro:"Aventure, culture locale et hospitalité marocaine se réunissent pour rendre votre visite unique.",
+        value1Title:"Le Maroc authentique", value1Text:"Découvrez les traditions locales, les saveurs marocaines et l'atmosphère unique du désert.",
+        value2Title:"Aventure et découverte", value2Text:"Explorez les pistes du désert, profitez d'activités en plein air et créez des souvenirs avec vos proches.",
+        value3Title:"Une attention personnalisée", value3Text:"Nous souhaitons simplifier l'organisation et vous donner des informations claires avant votre activité.",
+        explore:"EXPLOREZ AVEC NOUS", activitiesTitle:"Trouvez votre expérience dans le désert",
+        activitiesIntro:"Des aventures pleines d'adrénaline aux moments de détente, découvrez les expériences autour de Marrakech et d'Agafay.",
+        quadTitle:"Balade en quad", quadText:"Explorez les pistes du désert et profitez d'une balade pleine de sensations à Agafay.",
+        buggyTitle:"Aventures en buggy", buggyText:"Découvrez les grands paysages du désert lors d'une aventure en buggy.",
+        camelTitle:"Balades à dos de chameau", camelText:"Profitez d'une balade traditionnelle à dos de chameau et de la tranquillité du désert.",
+        foodTitle:"Cuisine marocaine", foodText:"Goûtez aux plats traditionnels marocains et découvrez l'hospitalité locale.",
+        eveningTitle:"Soirées dans le désert", eveningText:"Profitez de l'atmosphère du désert au coucher du soleil sur le Maroc.",
+        poolTitle:"Détente et relaxation", poolText:"Ajoutez un moment de détente à votre aventure lorsque l'accès à la piscine est disponible.",
+        startAdventure:"VOTRE AVENTURE COMMENCE ICI", ctaTitle:"Prêt à découvrir le Maroc ?",
+        ctaText:"Découvrez nos forfaits et choisissez l'expérience idéale pour votre séjour. Contactez-nous pour préparer votre visite.",
+        explorePackages:"Voir les forfaits", instagram:"Suivez-nous sur Instagram", contact:"Nous contacter",
+        rights:"Tous droits réservés.", emailUs:"Nous écrire", backHome:"Retour à l'accueil"
+      },
+
+      ar: {
+        home:"الرئيسية", packages:"الباقات", activities:"الأنشطة", about:"من نحن", book:"احجز الآن ↗",
+        welcome:"مرحباً بكم في المغرب", heroTitle:"اكتشف سحر الصحراء",
+        heroText:"ضيافة مغربية أصيلة ومغامرات لا تُنسى ولحظات مميزة في مراكش وصحراء أكفاي.",
+        ourStory:"قصتنا", storyTitle:"أكثر من رحلة، إنها تجربة مميزة",
+        story1:"مرحباً بكم في Sultans Desert، بوابتكم لاكتشاف جمال المغرب وثقافته ومغامراته. نساعدكم على استكشاف مراكش وصحراء أكفاي من خلال تجارب محلية لا تُنسى.",
+        story2:"من مغامرات الكواد والبوغي إلى ركوب الجمال والأطباق المغربية والأمسيات الجميلة في الصحراء، نقدم تجارب متنوعة تناسب مختلف الزوار.",
+        story3:"هدفنا أن تعيشوا تجربة ممتعة ومميزة، وأن تتعرفوا على كرم الضيافة المغربية.",
+        whyUs:"لماذا Sultans Desert؟", valuesTitle:"تجارب صُممت من أجلكم",
+        valuesIntro:"نجمع بين المغامرة والثقافة المحلية والضيافة المغربية لتكون زيارتكم مميزة.",
+        value1Title:"المغرب الأصيل", value1Text:"اكتشفوا التقاليد المحلية والنكهات المغربية والأجواء الفريدة للصحراء.",
+        value2Title:"المغامرة والاكتشاف", value2Text:"استكشفوا مسارات الصحراء واستمتعوا بالأنشطة الخارجية واصنعوا ذكريات جميلة مع العائلة والأصدقاء.",
+        value3Title:"اهتمام خاص بكم", value3Text:"نسعى إلى تسهيل التخطيط لرحلتكم وتوفير معلومات واضحة قبل النشاط.",
+        explore:"اكتشفوا معنا", activitiesTitle:"اختاروا تجربتكم في الصحراء",
+        activitiesIntro:"من المغامرات المشوقة إلى لحظات الاسترخاء، اكتشفوا تجارب مميزة في مراكش وصحراء أكفاي.",
+        quadTitle:"ركوب الدراجات الرباعية", quadText:"استكشفوا مسارات الصحراء واستمتعوا بمغامرة مشوقة في أكفاي.",
+        buggyTitle:"مغامرات البوغي", buggyText:"اكتشفوا المناظر الصحراوية الواسعة خلال جولة ممتعة بسيارة البوغي.",
+        camelTitle:"ركوب الجمال", camelText:"استمتعوا بجولة تقليدية على ظهر الجمل وسط أجواء الصحراء الهادئة.",
+        foodTitle:"المطبخ المغربي", foodText:"تذوقوا الأطباق المغربية التقليدية واكتشفوا كرم الضيافة المحلية.",
+        eveningTitle:"أمسيات الصحراء", eveningText:"استمتعوا بأجواء الصحراء عند غروب الشمس فوق المناظر المغربية.",
+        poolTitle:"الراحة والاسترخاء", poolText:"أضيفوا لحظات من الاسترخاء إلى رحلتكم عندما يكون المسبح متاحاً.",
+        startAdventure:"مغامرتكم تبدأ من هنا", ctaTitle:"هل أنتم مستعدون لاكتشاف المغرب؟",
+        ctaText:"اكتشفوا باقاتنا واختاروا التجربة المناسبة لرحلتكم. تواصلوا معنا إذا احتجتم إلى المساعدة في التخطيط.",
+        explorePackages:"اكتشفوا الباقات", instagram:"تابعونا على إنستغرام", contact:"اتصلوا بنا",
+        rights:"جميع الحقوق محفوظة.", emailUs:"راسلونا", backHome:"العودة إلى الرئيسية"
+      }
+    };
+
+    const languageSelect = document.getElementById("language");
+
+    function setLanguage(language) {
+      const dictionary = translations[language] || translations.en;
+      const isArabic = language === "ar";
+
+      document.documentElement.lang = language;
+      document.documentElement.dir = isArabic ? "rtl" : "ltr";
+      document.title = {
+        en: "About Us | Sultans Desert Morocco",
+        es: "Sobre nosotros | Sultans Desert Marruecos",
+        fr: "À propos | Sultans Desert Maroc",
+        ar: "من نحن | Sultans Desert المغرب"
+      }[language];
+
+      document.querySelectorAll("[data-i18n]").forEach(element => {
+        const key = element.dataset.i18n;
+        if (dictionary[key]) element.textContent = dictionary[key];
+      });
+
+      try {
+        localStorage.setItem("sultans-desert-language", language);
+      } catch (error) {
+        /* Language selection still works if storage is unavailable. */
+      }
+    }
+
+    languageSelect.addEventListener
