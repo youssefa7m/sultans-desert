@@ -1,5 +1,5 @@
 
-const WHATSAPP_NUMBER = "ADD_YOUR_WHATSAPP_NUMBER";
+const WHATSAPP_NUMBER = "212660733375";
 const BOOKING_EMAIL = "sultansdesert@gmail.com";
 
 document.addEventListener("DOMContentLoaded", () => {
