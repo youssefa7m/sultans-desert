@@ -100,8 +100,8 @@
     const newStyle = document.createElement("style");
     newStyle.id = "sultans-translation-styles";
 
+    
     newStyle.textContent = `
-      /* Hide the Google Translate widget */
       #google_translate_element {
         position: absolute !important;
         width: 1px !important;
@@ -112,6 +112,53 @@
         opacity: 0 !important;
         pointer-events: none !important;
       }
+
+      .goog-te-banner-frame,
+      .goog-te-banner-frame.skiptranslate,
+      iframe.goog-te-banner-frame,
+      .goog-te-balloon-frame,
+      .goog-te-menu-frame,
+      #goog-gt-tt,
+      .goog-te-spinner-pos,
+      .goog-te-gadget,
+      .goog-logo-link,
+      body > .skiptranslate {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        max-height: 0 !important;
+        overflow: hidden !important;
+      }
+
+      html {
+        margin-top: 0 !important;
+      }
+
+      body {
+        top: 0 !important;
+        margin-top: 0 !important;
+      }
+
+      html[lang="ar"],
+      html[lang="ar"] body {
+        direction: rtl !important;
+        text-align: right;
+      }
+
+      html[lang="ar"] input,
+      html[lang="ar"] textarea,
+      html[lang="ar"] select {
+        direction: rtl;
+        text-align: right;
+      }
+
+      #site-language {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+    `;
+
 
       /* Hide Google's top translation toolbar */
       .goog-te-banner-frame,
