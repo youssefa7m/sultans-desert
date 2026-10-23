@@ -1,5 +1,5 @@
 
-const WHATSAPP_NUMBER = "+212660733375";
+const WHATSAPP_NUMBER = "212660733375";
 const BOOKING_EMAIL = "sultansdesert@gmail.com";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const notes = value("notes");
 
     if (!name || !phone || !activity || !date || !people) {
-      alert("Please complete your name, phone, activity, date and number of people.");
+      alert(
+        "Please complete your name, phone, activity, date and number of people."
+      );
       return null;
     }
 
@@ -55,9 +57,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  document.querySelectorAll(".book").forEach(button => {
+  document.querySelectorAll(".book").forEach((button) => {
     button.addEventListener("click", () => {
       fillBooking(button.dataset.package || "");
+
       document.getElementById("booking")
         ?.scrollIntoView({ behavior: "smooth" });
     });
@@ -90,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ?.scrollIntoView({ behavior: "smooth" });
     });
 
-  form.addEventListener("submit", event => {
+  form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     const message = bookingDetails();
@@ -120,20 +123,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   function sendWhatsApp(message) {
-    if (
-      !WHATSAPP_NUMBER ||
-      WHATSAPP_NUMBER === "ADD_YOUR_WHATSAPP_NUMBER"
-    ) {
-      alert(
-        "WhatsApp number has not been added yet. Please use the email button or add your business WhatsApp number in script.js."
-      );
+    const number = WHATSAPP_NUMBER.replace(/\D/g, "");
+
+    if (!number || number === "ADDYOURWHATSAPPNUMBER") {
+      alert("WhatsApp number is missing. Please check script.js.");
       return;
     }
 
-    const url = "https://wa.me/" + WHATSAPP_NUMBER +
+    const url = "https://wa.me/" + number +
       "?text=" + encodeURIComponent(message);
 
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noopener,noreferrer");
   }
 
   document.getElementById("send-whatsapp")
@@ -149,17 +149,21 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("footer-whatsapp");
 
   if (footerWhatsApp) {
-    footerWhatsApp.addEventListener("click", event => {
+    footerWhatsApp.addEventListener("click", (event) => {
       event.preventDefault();
 
-      if (WHATSAPP_NUMBER === "ADD_YOUR_WHATSAPP_NUMBER") {
-        alert("Please add your real WhatsApp number in script.js first.");
-      } else {
-        window.open(
-          "https://wa.me/" + WHATSAPP_NUMBER,
-          "_blank"
-        );
+      const number = WHATSAPP_NUMBER.replace(/\D/g, "");
+
+      if (!number) {
+        alert("WhatsApp number is missing. Please check script.js.");
+        return;
       }
+
+      window.open(
+        "https://wa.me/" + number,
+        "_blank",
+        "noopener,noreferrer"
+      );
     });
   }
 });
