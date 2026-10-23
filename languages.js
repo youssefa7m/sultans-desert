@@ -1,3 +1,4 @@
+
 (() => {
   "use strict";
 
@@ -15,7 +16,13 @@
   function setDocumentLanguage(language) {
     document.documentElement.lang = language;
     document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-    document.body.classList.toggle("language-arabic", language === "ar");
+
+    if (document.body) {
+      document.body.classList.toggle(
+        "language-arabic",
+        language === "ar"
+      );
+    }
   }
 
   function saveLanguage(language) {
@@ -28,6 +35,10 @@
     } catch (_) {}
 
     setDocumentLanguage(language);
+
+    document.querySelectorAll("#site-language").forEach((picker) => {
+      picker.value = language;
+    });
 
     if (googleReady) {
       const googleSelect = document.querySelector(".goog-te-combo");
@@ -53,28 +64,44 @@
 
     googleReady = true;
 
+    let attempts = 0;
+
     const waitForGoogle = setInterval(() => {
       const googleSelect = document.querySelector(".goog-te-combo");
 
-      if (!googleSelect) return;
+      attempts++;
 
-      clearInterval(waitForGoogle);
+      if (googleSelect) {
+        clearInterval(waitForGoogle);
 
-      googleSelect.value = currentLanguage;
-      if (currentLanguage !== "en") {
-        googleSelect.dispatchEvent(new Event("change"));
+        googleSelect.value = currentLanguage;
+
+        if (currentLanguage !== "en") {
+          googleSelect.dispatchEvent(new Event("change"));
+        }
+
+        setDocumentLanguage(currentLanguage);
+        hideGoogleInterface();
       }
 
-      setDocumentLanguage(currentLanguage);
+      if (attempts >= 50) {
+        clearInterval(waitForGoogle);
+      }
     }, 300);
-
-    setTimeout(() => clearInterval(waitForGoogle), 15000);
   }
 
-  function addTranslationStyles() {
-    const style = document.createElement("style");
+  function hideGoogleInterface() {
+    const style = document.getElementById(
+      "sultans-translation-styles"
+    );
 
-    style.textContent = `
+    if (style) return;
+
+    const newStyle = document.createElement("style");
+    newStyle.id = "sultans-translation-styles";
+
+    newStyle.textContent = `
+      /* Hide the Google Translate widget */
       #google_translate_element {
         position: absolute !important;
         width: 1px !important;
@@ -82,26 +109,42 @@
         overflow: hidden !important;
         left: -9999px !important;
         top: -9999px !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
       }
 
+      /* Hide Google's top translation toolbar */
       .goog-te-banner-frame,
+      .goog-te-banner-frame.skiptranslate,
+      iframe.goog-te-banner-frame,
       .goog-te-balloon-frame,
+      .goog-te-menu-frame,
       #goog-gt-tt,
-      .goog-te-spinner-pos {
+      .goog-te-spinner-pos,
+      .goog-te-gadget,
+      .goog-logo-link,
+      .skiptranslate iframe {
         display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        max-height: 0 !important;
+      }
+
+      /* Prevent Google from pushing the website down */
+      html,
+      body {
+        top: 0 !important;
+        margin-top: 0 !important;
       }
 
       body {
-        top: 0 !important;
+        position: static !important;
       }
 
-      html.language-ar,
-      html[lang="ar"] {
-        direction: rtl;
-      }
-
+      /* Arabic direction */
+      html[lang="ar"],
       html[lang="ar"] body {
-        direction: rtl;
+        direction: rtl !important;
         text-align: right;
       }
 
@@ -111,13 +154,28 @@
         direction: rtl;
         text-align: right;
       }
+
+      /* Keep the website's own language selector visible */
+      #site-language {
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
     `;
 
-    document.head.appendChild(style);
+    document.head.appendChild(newStyle);
+
+    document.documentElement.style.setProperty("margin-top", "0", "important");
+
+    if (document.body) {
+      document.body.style.setProperty("top", "0", "important");
+      document.body.style.setProperty("margin-top", "0", "important");
+    }
   }
 
   function startTranslation() {
-    addTranslationStyles();
+    hideGoogleInterface();
 
     let container = document.getElementById("google_translate_element");
 
@@ -144,6 +202,7 @@
 
       script.src =
         "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+
       script.async = true;
       script.dataset.googleTranslate = "true";
 
