@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -49,6 +50,91 @@
     html[dir="rtl"] .section-head {
       direction: rtl;
     }
+
+    /* Social QR codes */
+    .social-qr-section {
+      padding: 50px 20px;
+      text-align: center;
+      background: #17120f;
+      color: #fff;
+    }
+
+    .social-qr-section h2 {
+      color: #c7a77b;
+      margin: 0 0 10px;
+    }
+
+    .social-qr-section > p {
+      color: #ded2c5;
+      margin-bottom: 25px;
+    }
+
+    .social-qr-grid {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 24px;
+      max-width: 900px;
+      margin: 28px auto 0;
+    }
+
+    .social-qr-card {
+      box-sizing: border-box;
+      width: 240px;
+      max-width: 100%;
+      padding: 22px 18px;
+      background: #fff;
+      color: #211a15;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+    }
+
+    .social-qr-card img {
+      display: block;
+      width: 160px;
+      height: 160px;
+      max-width: 100%;
+      margin: 0 auto 14px;
+      object-fit: contain;
+    }
+
+    .social-qr-card h3 {
+      margin: 10px 0;
+      color: #49372a;
+    }
+
+    .social-qr-card p {
+      font-size: 14px;
+      color: #746b62;
+      min-height: 42px;
+    }
+
+    .social-qr-card a {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 9px 13px;
+      border-radius: 6px;
+      background: #c7a77b;
+      color: #211a15;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .social-qr-card a:hover {
+      opacity: .85;
+    }
+
+    @media (max-width: 560px) {
+      .social-qr-grid {
+        gap: 16px;
+      }
+
+      .social-qr-card {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
   </style>
 </head>
 
@@ -61,11 +147,11 @@
   </a>
 
   <nav aria-label="Main navigation">
-  <a href="#packs">Packages</a>
-  <a href="#activities">Activities</a>
-  <a href="#booking">Book now</a>
-  <a href="about.html">About Us</a>
-</nav>
+    <a href="#packs">Packages</a>
+    <a href="#activities">Activities</a>
+    <a href="#booking">Book now</a>
+    <a href="about.html">About Us</a>
+  </nav>
 
   <label class="language-picker" aria-label="Choose language">
     <span class="sr-only">Language</span>
@@ -446,6 +532,60 @@
       </div>
     </form>
   </section>
+
+  <!-- Social media QR codes -->
+  <section class="social-qr-section" aria-labelledby="social-qr-title">
+    <h2 id="social-qr-title">Stay Connected with Sultans Desert</h2>
+    <p>Scan a QR code to contact us or follow our desert adventures.</p>
+
+    <div class="social-qr-grid">
+      <article class="social-qr-card">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&amp;data=https%3A%2F%2Fwa.me%2F212660733375"
+          alt="Sultans Desert WhatsApp QR code"
+          width="160"
+          height="160"
+          loading="lazy"
+        >
+        <h3>WhatsApp</h3>
+        <p>Contact us for bookings and information.</p>
+        <a href="https://wa.me/212660733375"
+           target="_blank"
+           rel="noopener noreferrer">Chat with us ↗</a>
+      </article>
+
+      <article class="social-qr-card">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&amp;data=https%3A%2F%2Fwww.instagram.com%2Fsultansdesert%2F"
+          alt="Sultans Desert Instagram QR code"
+          width="160"
+          height="160"
+          loading="lazy"
+        >
+        <h3>Instagram</h3>
+        <p>See our photos and desert adventures.</p>
+        <a href="https://www.instagram.com/sultansdesert/"
+           target="_blank"
+           rel="noopener noreferrer">Follow us ↗</a>
+      </article>
+
+      <article class="social-qr-card">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&amp;data=https%3A%2F%2Fwww.tiktok.com%2F%40sultansdesert"
+          alt="Sultans Desert TikTok QR code"
+          width="160"
+          height="160"
+          loading="lazy"
+        >
+        <h3>TikTok</h3>
+        <p>Watch our videos and discover desert adventures.</p>
+        <a href="https://www.tiktok.com/@sultansdesert"
+           target="_blank"
+           rel="noopener noreferrer">Follow us ↗</a>
+      </article>
+    </div>
+  </section>
+
 </main>
 
 <footer>
