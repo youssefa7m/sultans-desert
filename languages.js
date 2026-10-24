@@ -53,7 +53,7 @@
   function googleTranslateElementInit() {
     if (!window.google || !window.google.translate) return;
 
-    new google.translate.TranslateElement(
+    new window.google.translate.TranslateElement(
       {
         pageLanguage: "en",
         includedLanguages: "en,fr,es,ar,it",
@@ -63,17 +63,14 @@
     );
 
     googleReady = true;
-
     let attempts = 0;
 
     const waitForGoogle = setInterval(() => {
       const googleSelect = document.querySelector(".goog-te-combo");
-
       attempts++;
 
       if (googleSelect) {
         clearInterval(waitForGoogle);
-
         googleSelect.value = currentLanguage;
 
         if (currentLanguage !== "en") {
@@ -81,7 +78,6 @@
         }
 
         setDocumentLanguage(currentLanguage);
-        hideGoogleInterface();
       }
 
       if (attempts >= 50) {
@@ -90,18 +86,13 @@
     }, 300);
   }
 
-  function hideGoogleInterface() {
-    const style = document.getElementById(
-      "sultans-translation-styles"
-    );
+  function addTranslationStyles() {
+    if (document.getElementById("sultans-translation-styles")) return;
 
-    if (style) return;
+    const style = document.createElement("style");
+    style.id = "sultans-translation-styles";
 
-    const newStyle = document.createElement("style");
-    newStyle.id = "sultans-translation-styles";
-
-    
-    newStyle.textContent = `
+    style.textContent = `
       #google_translate_element {
         position: absolute !important;
         width: 1px !important;
@@ -130,65 +121,15 @@
         overflow: hidden !important;
       }
 
-      html {
-        margin-top: 0 !important;
-      }
-
-      body {
-        top: 0 !important;
-        margin-top: 0 !important;
-      }
-
-      html[lang="ar"],
-      html[lang="ar"] body {
-        direction: rtl !important;
-        text-align: right;
-      }
-
-      html[lang="ar"] input,
-      html[lang="ar"] textarea,
-      html[lang="ar"] select {
-        direction: rtl;
-        text-align: right;
-      }
-
-      #site-language {
-        display: inline-block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-      }
-    `;
-
-
-      /* Hide Google's top translation toolbar */
-      .goog-te-banner-frame,
-      .goog-te-banner-frame.skiptranslate,
-      iframe.goog-te-banner-frame,
-      .goog-te-balloon-frame,
-      .goog-te-menu-frame,
-      #goog-gt-tt,
-      .goog-te-spinner-pos,
-      .goog-te-gadget,
-      .goog-logo-link,
-      .skiptranslate iframe {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        max-height: 0 !important;
-      }
-
-      /* Prevent Google from pushing the website down */
       html,
       body {
-        top: 0 !important;
         margin-top: 0 !important;
       }
 
       body {
-        position: static !important;
+        top: 0 !important;
       }
 
-      /* Arabic direction */
       html[lang="ar"],
       html[lang="ar"] body {
         direction: rtl !important;
@@ -202,7 +143,6 @@
         text-align: right;
       }
 
-      /* Keep the website's own language selector visible */
       #site-language {
         display: inline-block !important;
         visibility: visible !important;
@@ -211,18 +151,11 @@
       }
     `;
 
-    document.head.appendChild(newStyle);
-
-    document.documentElement.style.setProperty("margin-top", "0", "important");
-
-    if (document.body) {
-      document.body.style.setProperty("top", "0", "important");
-      document.body.style.setProperty("margin-top", "0", "important");
-    }
+    document.head.appendChild(style);
   }
 
   function startTranslation() {
-    hideGoogleInterface();
+    addTranslationStyles();
 
     let container = document.getElementById("google_translate_element");
 
@@ -241,7 +174,6 @@
     });
 
     setDocumentLanguage(currentLanguage);
-
     window.googleTranslateElementInit = googleTranslateElementInit;
 
     if (!document.querySelector('script[data-google-translate="true"]')) {
