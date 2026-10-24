@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -136,27 +135,33 @@
       }
     }
 
-    /* Bottom Sultans Desert photo banner */
+    /* Sultans Desert banner */
     .desert-banner {
       width: 100%;
-      margin: 0 auto;
+      max-width: 1400px;
+      margin: 35px auto;
+      padding: 0 16px;
+      box-sizing: border-box;
       overflow: hidden;
       line-height: 0;
-      background: #17120f;
     }
 
     .desert-banner img {
       display: block;
       width: 100%;
       height: auto;
-      max-height: 720px;
-      object-fit: cover;
-      object-position: center;
+      object-fit: contain;
+      border-radius: 12px;
     }
 
     @media (max-width: 600px) {
+      .desert-banner {
+        padding: 0 10px;
+        margin: 20px auto;
+      }
+
       .desert-banner img {
-        max-height: none;
+        border-radius: 8px;
       }
     }
   </style>
@@ -467,6 +472,17 @@
     </div>
   </section>
 
+  <!-- SULTANS DESERT BANNER: before booking -->
+  <section class="desert-banner" aria-label="Sultans Desert adventures">
+    <img
+      src="./sultans-desert-banner.png"
+      alt="Sultans Desert adventures in Agafay: quad biking, buggy rides, camel rides and desert experiences"
+      loading="lazy"
+      width="1536"
+      height="1024"
+    >
+  </section>
+
   <section id="booking" class="booking">
     <div class="booking-copy">
       <p class="eyebrow">LET'S PLAN YOUR VISIT</p>
@@ -620,17 +636,6 @@
   <p><a id="footer-whatsapp" href="#booking">WhatsApp booking</a></p>
   <small>Prices, pickup arrangements and pool availability are confirmed before booking.</small>
 </footer>
-
-<!-- Bottom banner image -->
-<section class="desert-banner" aria-label="Sultans Desert adventures">
-  <img
-    src="./sultans-desert-banner.png"
-    alt="Sultans Desert adventures in Agafay: quad biking, buggy rides, Moroccan food and desert experiences"
-    loading="lazy"
-    width="1536"
-    height="1024"
-  >
-</section>
 
 <script src="script.js"></script>
 <script src="languages.js"></script>
