@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fbf8f3">
 
   <title>About Us | Sultans Desert Morocco</title>
   <meta name="description" content="Discover Sultans Desert and enjoy unforgettable quad biking, buggy rides, camel rides and authentic Moroccan experiences in Marrakech and Agafay.">
@@ -79,6 +80,35 @@
 
     .nav a:hover {
       color: #a67d4d;
+    }
+
+    .language-picker {
+      display: inline-flex;
+      align-items: center;
+      margin: 0 8px;
+    }
+
+    .language-picker select {
+      background: #fff;
+      border: 1px solid #d5c6a0;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font: inherit;
+      max-width: 150px;
+      color: #222;
+      cursor: pointer;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .book-button {
@@ -336,6 +366,17 @@
       text-decoration: none;
     }
 
+    html[dir="rtl"] body {
+      direction: rtl;
+      text-align: right;
+    }
+
+    html[dir="rtl"] .header,
+    html[dir="rtl"] .nav,
+    html[dir="rtl"] .cta-buttons {
+      direction: rtl;
+    }
+
     @media (max-width: 850px) {
       .header {
         flex-wrap: wrap;
@@ -378,6 +419,10 @@
 
       .nav a {
         font-size: 13px;
+      }
+
+      .language-picker {
+        margin: 0;
       }
 
       .hero {
@@ -442,6 +487,17 @@
       <a href="./index.html#activities">Activities</a>
       <a href="./about.html" aria-current="page">About Us</a>
     </nav>
+
+    <label class="language-picker" aria-label="Choose language">
+      <span class="sr-only">Language</span>
+      <select id="site-language" aria-label="Choose language">
+        <option value="en">🇬🇧 English</option>
+        <option value="fr">🇫🇷 Français</option>
+        <option value="es">🇪🇸 Español</option>
+        <option value="ar">🇲🇦 العربية</option>
+        <option value="it">🇮🇹 Italiano</option>
+      </select>
+    </label>
 
     <a class="book-button" href="./index.html#booking">BOOK NOW ↗</a>
   </header>
@@ -691,6 +747,7 @@
       new Date().getFullYear();
   </script>
 
+  <script src="./languages.js"></script>
+
 </body>
 </html>
-```
