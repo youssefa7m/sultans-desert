@@ -135,6 +135,30 @@
         max-width: 300px;
       }
     }
+
+    /* Bottom Sultans Desert photo banner */
+    .desert-banner {
+      width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+      line-height: 0;
+      background: #17120f;
+    }
+
+    .desert-banner img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 720px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    @media (max-width: 600px) {
+      .desert-banner img {
+        max-height: none;
+      }
+    }
   </style>
 </head>
 
@@ -180,9 +204,7 @@
     <div class="hero-copy">
       <p class="eyebrow">MARRAKECH · AGAFAY DESERT · MOROCCO</p>
       <h1>SULTANS<br><i>DESERT</i></h1>
-
       <p class="hero-tagline">Your Desert Adventure Starts Here.</p>
-
       <p>Discover quad biking, buggy adventures, camel rides and authentic Moroccan hospitality in the Agafay Desert.</p>
 
       <div class="hero-actions">
@@ -585,7 +607,6 @@
       </article>
     </div>
   </section>
-
 </main>
 
 <footer>
@@ -599,6 +620,17 @@
   <p><a id="footer-whatsapp" href="#booking">WhatsApp booking</a></p>
   <small>Prices, pickup arrangements and pool availability are confirmed before booking.</small>
 </footer>
+
+<!-- Bottom banner image -->
+<section class="desert-banner" aria-label="Sultans Desert adventures">
+  <img
+    src="./sultans-desert-banner.png"
+    alt="Sultans Desert adventures in Agafay: quad biking, buggy rides, Moroccan food and desert experiences"
+    loading="lazy"
+    width="1536"
+    height="1024"
+  >
+</section>
 
 <script src="script.js"></script>
 <script src="languages.js"></script>
