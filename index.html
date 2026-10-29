@@ -623,6 +623,128 @@
       </article>
     </div>
   </section>
+
+<!-- CUSTOMER REVIEWS SECTION -->
+<section id="reviews" class="customer-reviews">
+  <div class="reviews-heading">
+    <p>REAL DESERT EXPERIENCES</p>
+    <h2>What Our Guests Say</h2>
+    <span>Discover genuine customer experiences.</span>
+  </div>
+
+  <div id="reviews-list" class="reviews-grid">
+    <p>Loading customer reviews...</p>
+  </div>
+</section>
+
+<style>
+.customer-reviews {
+  padding: 75px 6%;
+  background: #f7f4ed;
+  color: #242424;
+}
+
+.reviews-heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.reviews-heading p {
+  color: #987342;
+  letter-spacing: 2px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.reviews-heading h2 {
+  font-size: clamp(28px, 4vw, 42px);
+  margin: 12px 0;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.guest-review {
+  background: white;
+  padding: 26px;
+  border-radius: 15px;
+  box-shadow: 0 5px 24px rgba(0,0,0,.06);
+}
+
+.guest-review .stars {
+  color: #e5a52c;
+  font-size: 23px;
+  letter-spacing: 3px;
+}
+
+.guest-review h3 {
+  margin: 12px 0 6px;
+}
+
+.guest-review p {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.guest-review small {
+  color: #777;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const container = document.getElementById("reviews-list");
+
+  if (!container) return;
+
+  try {
+    const reviews = await getApprovedReviews();
+
+    container.replaceChildren();
+
+    if (!reviews.length) {
+      container.textContent =
+        "Customer reviews will appear here soon.";
+      return;
+    }
+
+    reviews.forEach(review => {
+      const card = document.createElement("article");
+      card.className = "guest-review";
+
+      const stars = document.createElement("div");
+      stars.className = "stars";
+      stars.textContent = "★".repeat(review.rating) +
+        "☆".repeat(5 - review.rating);
+
+      const name = document.createElement("h3");
+      name.textContent = review.customer_name;
+
+      const comment = document.createElement("p");
+      comment.textContent = review.comment || "";
+
+      const date = document.createElement("small");
+      date.textContent = new Date(
+        review.created_at
+      ).toLocaleDateString("en-GB");
+
+      card.append(stars, name, comment, date);
+      container.appendChild(card);
+    });
+
+  } catch (error) {
+    console.error(error);
+    container.textContent =
+      "Reviews are temporarily unavailable.";
+  }
+});
+</script>
 </main>
 
 <footer>
