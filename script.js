@@ -167,3 +167,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+/* ===================================
+   SULTANS DESERT - SUPABASE REVIEWS
+=================================== */
+
+const SUPABASE_URL =
+  "https://rnytitvqrtliwtsnkaqs.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_MUi5AvqpG0iDh4yK_BkvDQ_-2bDez19";
+
+async function getApprovedReviews() {
+  const endpoint =
+    `${SUPABASE_URL}/rest/v1/reviews` +
+    `?select=id,customer_name,rating,comment,created_at,activity_id` +
+    `&approved=eq.true` +
+    `&order=created_at.desc`;
+
+  try {
+    const response = await fetch(endpoint, {
+      headers: {
+        apikey: SUPABASE_PUBLISHABLE_KEY
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Could not load reviews");
+    }
+
+    const reviews = await response.json();
+    return reviews;
+
+  } catch (error) {
+    console.error("Reviews error:", error);
+    return [];
+  }
+}
+
