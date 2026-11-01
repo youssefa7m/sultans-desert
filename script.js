@@ -1,7 +1,8 @@
 
 /* =========================================
    SULTANS DESERT
-   WEBSITE BOOKING + REVIEWS + PHOTO GALLERY
+   BOOKING + REVIEWS + PHOTO GALLERY
+   WITH PHOTO REMOVE BUTTON
 ========================================= */
 
 const WHATSAPP_NUMBER = "212660733375";
@@ -13,7 +14,6 @@ const BOOKING_EMAIL = "sultansdesert@gmail.com";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("booking-form");
-
   if (!form) return;
 
   const value = (id) =>
@@ -55,9 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const activityField = document.getElementById("activity");
     const notesField = document.getElementById("notes");
 
-    if (activityField) {
-      activityField.value = activity;
-    }
+    if (activityField) activityField.value = activity;
 
     if (option && notesField) {
       notesField.value = [
@@ -134,27 +132,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const message = bookingDetails();
 
-    if (message) {
-      sendEmail(message);
-    }
+    if (message) sendEmail(message);
   });
 
   document.getElementById("send-email")
     ?.addEventListener("click", () => {
       const message = bookingDetails();
-
-      if (message) {
-        sendEmail(message);
-      }
+      if (message) sendEmail(message);
     });
 
   document.getElementById("send-whatsapp")
     ?.addEventListener("click", () => {
       const message = bookingDetails();
-
-      if (message) {
-        sendWhatsApp(message);
-      }
+      if (message) sendWhatsApp(message);
     });
 
   const footerWhatsApp =
@@ -221,7 +211,7 @@ async function getApprovedReviews() {
 }
 
 /* =========================================
-   PHOTO GALLERY DESIGN
+   DESIGN
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -315,18 +305,75 @@ document.addEventListener("DOMContentLoaded", () => {
       margin-top: 9px;
     }
 
+    .review-photo-count {
+      color: #555;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
     #review-photo-preview {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 12px;
       margin-top: 15px;
     }
 
-    #review-photo-preview img {
+    .review-photo-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 11px;
+      background: #eee;
+      border: 1px solid #e5e5e5;
+    }
+
+    .review-photo-tile img {
       width: 100%;
-      height: 105px;
+      height: 115px;
       object-fit: cover;
-      border-radius: 9px;
+      display: block;
+    }
+
+    .review-photo-remove {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 31px;
+      height: 31px;
+      border: none;
+      border-radius: 50%;
+      background: #cc3030;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    }
+
+    .review-photo-remove:hover {
+      background: #941c1c;
+      transform: scale(1.06);
+    }
+
+    .review-photo-remove:focus-visible {
+      outline: 3px solid #111;
+      outline-offset: 2px;
+    }
+
+    .review-photo-tile-name {
+      display: block;
+      padding: 6px;
+      color: #555;
+      font-size: 11px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     @media (max-width: 600px) {
@@ -343,8 +390,14 @@ document.addEventListener("DOMContentLoaded", () => {
         padding: 10px;
       }
 
-      #review-photo-preview img {
-        height: 85px;
+      .review-photo-tile img {
+        height: 95px;
+      }
+
+      .review-photo-remove {
+        width: 28px;
+        height: 28px;
+        font-size: 21px;
       }
     }
   `;
@@ -445,7 +498,7 @@ async function loadGuestPhotoGallery() {
 }
 
 /* =========================================
-   ADD GALLERY TO WEBSITE AUTOMATICALLY
+   ADD GALLERY AUTOMATICALLY
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -518,62 +571,141 @@ document.addEventListener("DOMContentLoaded", () => {
   const help = document.createElement("p");
   help.className = "review-photo-help";
   help.textContent =
-    "Choose up to 3 photos. Maximum 5 MB per photo. " +
-    "JPEG, PNG or WebP only. " +
-    "Photos are published after approval.";
+    "Choose up to 3 photos, maximum 5 MB each. " +
+    "You can remove any photo using the red X " +
+    "before submitting your review. " +
+    "Photos are published only after approval.";
+
+  const countMessage = document.createElement("p");
+  countMessage.className = "review-photo-count";
+  countMessage.setAttribute("aria-live", "polite");
 
   const preview = document.createElement("div");
   preview.id = "review-photo-preview";
 
-  photoContainer.append(label, photoInput, help, preview);
+  photoContainer.append(
+    label,
+    photoInput,
+    help,
+    countMessage,
+    preview
+  );
 
   reviewForm.insertBefore(photoContainer, submitButton);
 
-  /* PHOTO PREVIEW */
+  /* =========================================
+     SELECTED PHOTOS STATE
+  ========================================= */
 
-  photoInput.addEventListener("change", () => {
+  let selectedPhotos = [];
+  let previewUrls = [];
+
+  function clearPreviewUrls() {
+    previewUrls.forEach((url) => {
+      URL.revokeObjectURL(url);
+    });
+
+    previewUrls = [];
+  }
+
+  function renderPhotoPreview() {
+    clearPreviewUrls();
     preview.replaceChildren();
 
-    const files = Array.from(photoInput.files || []);
+    const numberOfPhotos = selectedPhotos.length;
 
-    if (files.length > 3) {
-      alert("Please choose a maximum of 3 photos.");
-      photoInput.value = "";
+    countMessage.textContent =
+      numberOfPhotos +
+      " of 3 photos selected";
+
+    selectedPhotos.forEach((file, index) => {
+      const tile = document.createElement("div");
+      tile.className = "review-photo-tile";
+
+      const image = document.createElement("img");
+      const objectUrl = URL.createObjectURL(file);
+
+      previewUrls.push(objectUrl);
+
+      image.src = objectUrl;
+      image.alt = "Selected photo " + (index + 1);
+
+      const removeButton =
+        document.createElement("button");
+
+      removeButton.type = "button";
+      removeButton.className = "review-photo-remove";
+      removeButton.textContent = "×";
+
+      removeButton.setAttribute(
+        "aria-label",
+        "Remove photo " + (index + 1)
+      );
+
+      removeButton.title = "Remove this photo";
+
+      /* REMOVE ONLY THIS PHOTO */
+
+      removeButton.addEventListener("click", () => {
+        selectedPhotos.splice(index, 1);
+
+        renderPhotoPreview();
+      });
+
+      const fileName = document.createElement("span");
+      fileName.className = "review-photo-tile-name";
+      fileName.textContent = file.name;
+
+      tile.append(image, removeButton, fileName);
+      preview.appendChild(tile);
+    });
+  }
+
+  renderPhotoPreview();
+
+  /* =========================================
+     SELECT NEW PHOTOS
+  ========================================= */
+
+  photoInput.addEventListener("change", () => {
+    const newFiles = Array.from(photoInput.files || []);
+
+    // Reset the picker, but keep our selectedPhotos.
+    // This lets the customer add or remove photos.
+    photoInput.value = "";
+
+    if (!newFiles.length) return;
+
+    if (selectedPhotos.length + newFiles.length > 3) {
+      alert("You can select a maximum of 3 photos.");
       return;
     }
 
-    for (const file of files) {
+    for (const file of newFiles) {
       if (
         !["image/jpeg", "image/png", "image/webp"]
           .includes(file.type)
       ) {
-        alert("Please use JPEG, PNG or WebP photos.");
-        photoInput.value = "";
-        preview.replaceChildren();
+        alert("Please select JPEG, PNG or WebP photos.");
         return;
       }
 
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Each photo must be smaller than 5 MB.");
-        photoInput.value = "";
-        preview.replaceChildren();
+      if (
+        file.size < 100 ||
+        file.size > 5 * 1024 * 1024
+      ) {
+        alert(
+          "Each photo must be smaller than 5 MB."
+        );
         return;
       }
     }
 
-    files.forEach((file) => {
-      const image = document.createElement("img");
-      const objectUrl = URL.createObjectURL(file);
-
-      image.src = objectUrl;
-      image.alt = "Selected photo preview";
-
-      image.addEventListener("load", () => {
-        URL.revokeObjectURL(objectUrl);
-      }, { once: true });
-
-      preview.appendChild(image);
+    newFiles.forEach((file) => {
+      selectedPhotos.push(file);
     });
+
+    renderPhotoPreview();
   });
 
   /* =========================================
@@ -583,10 +715,10 @@ document.addEventListener("DOMContentLoaded", () => {
   reviewForm.addEventListener(
     "submit",
     async (event) => {
-      const files = Array.from(photoInput.files || []);
+      const files = Array.from(selectedPhotos);
 
-      // If no photos were selected, the existing
-      // review submission in index.html handles it.
+      // If no photos are selected,
+      // index.html handles the normal review.
       if (files.length === 0) return;
 
       event.preventDefault();
@@ -739,7 +871,9 @@ document.addEventListener("DOMContentLoaded", () => {
         /* STEP 3: SUCCESS */
 
         reviewForm.reset();
-        preview.replaceChildren();
+
+        selectedPhotos = [];
+        renderPhotoPreview();
 
         status.textContent =
           "Thank you! Your review and " +
