@@ -1120,3 +1120,751 @@ document.addEventListener("DOMContentLoaded", () => {
       true
     );
 });
+
+/* =====================================================
+   SULTANS DESERT — DESERT MOTION FOR PACKAGE PHOTOS
+   Cinematic pan, scroll reveal, moving camel/quad/buggy.
+   Drawn silhouettes are decorative; original photos stay intact.
+===================================================== */
+
+(() => {
+  "use strict";
+
+  function setupDesertMotion() {
+    if (document.getElementById("sd-desert-motion-css")) return;
+
+    const style = document.createElement("style");
+    style.id = "sd-desert-motion-css";
+
+    style.textContent = `
+      #packs .sd-motion-card,
+      #activities .sd-motion-card {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity .8s ease, transform .8s ease,
+                    box-shadow .35s ease;
+      }
+
+      #packs .sd-motion-card.sd-revealed,
+      #activities .sd-motion-card.sd-revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .sd-motion-card:hover {
+        box-shadow: 0 16px 36px rgba(60,39,18,.16);
+      }
+
+      .sd-motion-media {
+        position: relative;
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        isolation: isolate;
+        background: #bca17a;
+      }
+
+      .sd-motion-media > img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.055);
+        animation: sd-pan 12s ease-in-out infinite alternate;
+        animation-play-state: paused;
+      }
+
+      .sd-motion-card.sd-playing .sd-motion-media > img {
+        animation-play-state: running;
+      }
+
+      .sd-motion-media::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+
+        background: linear-gradient(
+          110deg,
+          transparent 25%,
+          rgba(255,235,196,.08) 42%,
+          rgba(255,246,222,.24) 50%,
+          rgba(255,235,196,.08) 58%,
+          transparent 75%
+        );
+
+        transform: translateX(-140%);
+        animation: sd-glow 9s ease-in-out infinite;
+        animation-play-state: paused;
+      }
+
+      .sd-motion-card.sd-playing .sd-motion-media::before {
+        animation-play-state: running;
+      }
+
+      .sd-dust {
+        position: absolute;
+        inset: auto 0 0;
+        height: 36%;
+        z-index: 3;
+        pointer-events: none;
+        opacity: .3;
+
+        background:
+          radial-gradient(
+            ellipse at 20% 100%,
+            rgba(238,212,164,.48),
+            transparent 48%
+          ),
+          radial-gradient(
+            ellipse at 77% 100%,
+            rgba(246,227,179,.32),
+            transparent 52%
+          );
+
+        animation:
+          sd-dust-drift 6s ease-in-out infinite alternate;
+        animation-play-state: paused;
+      }
+
+      .sd-motion-card.sd-playing .sd-dust {
+        animation-play-state: running;
+      }
+
+      .sd-runner {
+        position: absolute;
+        z-index: 4;
+        bottom: 5px;
+        left: -110px;
+        width: 96px;
+        height: 58px;
+        opacity: 0;
+        pointer-events: none;
+
+        filter:
+          drop-shadow(0 4px 3px rgba(25,19,12,.4));
+
+        animation: sd-run-across 12s linear infinite;
+        animation-play-state: paused;
+      }
+
+      .sd-runner[data-kind="camel"] {
+        width: 91px;
+        bottom: 9px;
+      }
+
+      .sd-runner[data-kind="buggy"] {
+        width: 106px;
+      }
+
+      .sd-runner[data-second="yes"] {
+        bottom: 20px;
+        width: 70px;
+        animation-duration: 17s;
+        animation-delay: -6s;
+        opacity: .5;
+      }
+
+      .sd-runner svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .sd-motion-card.sd-playing .sd-runner {
+        animation-play-state: running;
+      }
+
+      .sd-runner .sd-wheel {
+        transform-box: fill-box;
+        transform-origin: center;
+        animation: sd-wheel-spin .5s linear infinite;
+      }
+
+      .sd-runner .sd-leg-a,
+      .sd-runner .sd-leg-b {
+        transform-box: fill-box;
+        transform-origin: center top;
+
+        animation:
+          sd-leg-swing .33s ease-in-out
+          infinite alternate;
+      }
+
+      .sd-runner .sd-leg-b {
+        animation-direction: alternate-reverse;
+      }
+
+      .sd-runner .sd-ride-body {
+        animation:
+          sd-ride-bump .42s ease-in-out
+          infinite alternate;
+      }
+
+      .sd-motion-card:hover
+      .sd-motion-media > img {
+        animation-duration: 7s;
+      }
+
+      .sd-motion-card:hover
+      .sd-runner:not([data-second]) {
+        animation-duration: 8s;
+      }
+
+      @keyframes sd-pan {
+        from {
+          transform:
+            scale(1.055)
+            translate(-1.1%,0);
+        }
+
+        to {
+          transform:
+            scale(1.14)
+            translate(1.1%,-1.4%);
+        }
+      }
+
+      @keyframes sd-glow {
+        0%,22% {
+          transform: translateX(-140%);
+          opacity: 0;
+        }
+
+        38% {
+          opacity: .9;
+        }
+
+        68%,100% {
+          transform: translateX(140%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes sd-dust-drift {
+        from {
+          transform: translateX(-15px);
+          opacity: .16;
+        }
+
+        to {
+          transform: translateX(15px);
+          opacity: .5;
+        }
+      }
+
+      @keyframes sd-run-across {
+        0% {
+          left: -112px;
+          opacity: 0;
+          transform: translateY(2px);
+        }
+
+        13%,83% {
+          opacity: .83;
+        }
+
+        100% {
+          left: calc(100% + 20px);
+          opacity: 0;
+          transform: translateY(-2px);
+        }
+      }
+
+      @keyframes sd-wheel-spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes sd-leg-swing {
+        from {
+          transform: rotate(-13deg);
+        }
+
+        to {
+          transform: rotate(16deg);
+        }
+      }
+
+      @keyframes sd-ride-bump {
+        from {
+          transform: translateY(1px);
+        }
+
+        to {
+          transform: translateY(-2px);
+        }
+      }
+
+      @media (max-width:600px) {
+        .sd-motion-media {
+          height: 185px;
+        }
+
+        .sd-runner {
+          width: 77px;
+          height: 47px;
+        }
+
+        .sd-runner[data-kind="camel"] {
+          width: 74px;
+        }
+
+        .sd-runner[data-kind="buggy"] {
+          width: 84px;
+        }
+
+        .sd-runner[data-second="yes"] {
+          width: 53px;
+        }
+      }
+
+      @media (prefers-reduced-motion:reduce) {
+        #packs .sd-motion-card,
+        #activities .sd-motion-card {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+
+        .sd-motion-media > img {
+          animation: none !important;
+          transform: none !important;
+        }
+
+        .sd-motion-media::before,
+        .sd-dust {
+          display: none !important;
+        }
+
+        .sd-runner {
+          display: none !important;
+        }
+      }
+    `;
+
+    document.head.appendChild(style);
+
+    /* ===================================
+       CAMEL ILLUSTRATION
+    =================================== */
+
+    const illustrations = {
+      camel: `
+        <svg
+          viewBox="0 0 145 85"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g
+            fill="#edcf9b"
+            stroke="#694d30"
+            stroke-width="2.6"
+            stroke-linejoin="round"
+          >
+            <path d="
+              M18 46
+              Q29 47 34 31
+              Q42 12 51 34
+              Q58 43 67 29
+              Q76 13 84 38
+              L97 44
+              L106 36
+              L111 18
+              Q114 11 121 14
+              L130 20
+              L140 21
+              L140 29
+              L132 32
+              L120 27
+              L117 44
+              Q115 55 95 55
+              L43 55
+              Q25 56 18 46Z
+            "/>
+
+            <path d="
+              M127 16
+              L130 8
+              L134 19Z
+            "/>
+
+            <path
+              class="sd-leg-a"
+              d="M39 52 L47 53 L41 74 L44 80 L31 80 L34 71Z"
+            />
+
+            <path
+              class="sd-leg-b"
+              d="M58 54 L65 53 L69 74 L72 80 L59 80 L61 71Z"
+            />
+
+            <path
+              class="sd-leg-a"
+              d="M91 53 L98 52 L95 73 L99 80 L85 80 L89 72Z"
+            />
+
+            <path
+              class="sd-leg-b"
+              d="M104 52 L110 50 L113 74 L116 80 L104 80 L107 72Z"
+            />
+          </g>
+
+          <circle
+            cx="131"
+            cy="23"
+            r="1.8"
+            fill="#4a3220"
+          />
+        </svg>
+      `,
+
+      /* ===================================
+         QUAD ILLUSTRATION
+      =================================== */
+
+      quad: `
+        <svg
+          viewBox="0 0 145 85"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g
+            class="sd-ride-body"
+            fill="none"
+            stroke="#f6dfb7"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="
+                M15 57
+                L32 48
+                L52 46
+                L67 38
+                L89 40
+                L109 50
+                L128 55
+                L129 63
+                L15 63Z
+              "
+              fill="#d0a467"
+              stroke="#553f27"
+            />
+
+            <path
+              d="
+                M64 40
+                L66 27
+                L85 26
+                L92 39
+                M46 45
+                L37 31
+              "
+            />
+
+            <circle
+              cx="68"
+              cy="17"
+              r="9"
+              fill="#f6dfb7"
+              stroke="#553f27"
+              stroke-width="2"
+            />
+
+            <path
+              d="
+                M62 27
+                L53 42
+                L76 44
+                L88 53
+              "
+              stroke-width="6"
+            />
+          </g>
+
+          <g class="sd-wheel">
+            <circle
+              cx="35"
+              cy="64"
+              r="15"
+              fill="#252821"
+              stroke="#f6dfb7"
+              stroke-width="3"
+            />
+
+            <path
+              d="
+                M35 51 V77
+                M22 64 H48
+                M26 55 L44 73
+                M44 55 L26 73
+              "
+              stroke="#e3ba81"
+              stroke-width="2"
+            />
+          </g>
+
+          <g class="sd-wheel">
+            <circle
+              cx="109"
+              cy="64"
+              r="15"
+              fill="#252821"
+              stroke="#f6dfb7"
+              stroke-width="3"
+            />
+
+            <path
+              d="
+                M109 51 V77
+                M96 64 H122
+                M100 55 L118 73
+                M118 55 L100 73
+              "
+              stroke="#e3ba81"
+              stroke-width="2"
+            />
+          </g>
+        </svg>
+      `,
+
+      /* ===================================
+         BUGGY ILLUSTRATION
+      =================================== */
+
+      buggy: `
+        <svg
+          viewBox="0 0 150 85"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <g
+            class="sd-ride-body"
+            fill="none"
+            stroke="#f1d6a2"
+            stroke-width="4.5"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+          >
+            <path
+              d="
+                M15 57
+                L38 49
+                L51 23
+                L100 23
+                L122 49
+                L137 56
+                L136 62
+                L15 62Z
+              "
+            />
+
+            <path
+              d="
+                M45 49
+                L105 49
+                L99 24
+                M53 24
+                L49 49
+                M78 24
+                L78 49
+                M20 54
+                L33 39
+                L47 39
+              "
+            />
+          </g>
+
+          <g class="sd-wheel">
+            <circle
+              cx="39"
+              cy="64"
+              r="15"
+              fill="#272721"
+              stroke="#f2d7a5"
+              stroke-width="3"
+            />
+
+            <path
+              d="
+                M39 53 V75
+                M28 64 H50
+              "
+              stroke="#f2d7a5"
+              stroke-width="2"
+            />
+          </g>
+
+          <g class="sd-wheel">
+            <circle
+              cx="116"
+              cy="64"
+              r="15"
+              fill="#272721"
+              stroke="#f2d7a5"
+              stroke-width="3"
+            />
+
+            <path
+              d="
+                M116 53 V75
+                M105 64 H127
+              "
+              stroke="#f2d7a5"
+              stroke-width="2"
+            />
+          </g>
+        </svg>
+      `
+    };
+
+    /* ===================================
+       REDUCED MOTION SUPPORT
+    =================================== */
+
+    const reduced =
+      window.matchMedia &&
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+    /* ===================================
+       SCROLL ANIMATION OBSERVER
+    =================================== */
+
+    const observer =
+      !reduced && "IntersectionObserver" in window
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add(
+                    "sd-revealed",
+                    "sd-playing"
+                  );
+                } else {
+                  entry.target.classList.remove(
+                    "sd-playing"
+                  );
+                }
+              });
+            },
+            {
+              threshold: .08,
+              rootMargin: "0px 0px 35px 0px"
+            }
+          )
+        : null;
+
+    /* ===================================
+       APPLY MOTION TO PACKAGES AND ACTIVITIES
+    =================================== */
+
+    document.querySelectorAll(
+      "#packs .card, #activities .card"
+    ).forEach((card, index) => {
+
+      const img = card.querySelector(":scope > img");
+      if (!img) return;
+
+      /* Keep original image */
+      const media = document.createElement("div");
+      media.className = "sd-motion-media";
+
+      img.replaceWith(media);
+      media.appendChild(img);
+
+      /* Add animated desert dust */
+      const dust = document.createElement("div");
+      dust.className = "sd-dust";
+      dust.setAttribute("aria-hidden", "true");
+
+      media.appendChild(dust);
+
+      const title = (
+        card.querySelector("h3")?.textContent || ""
+      ).toLowerCase();
+
+      const desc = (
+        img.alt || ""
+      ).toLowerCase();
+
+      let kinds = [];
+
+      /* Pick the right animation */
+      if (
+        title.includes("buggy") ||
+        desc.includes("buggy")
+      ) {
+        kinds.push("buggy");
+      } else if (
+        title.includes("quad") ||
+        desc.includes("quad")
+      ) {
+        kinds.push("quad");
+      }
+
+      if (
+        title.includes("camel") ||
+        (desc.includes("camel") && !kinds.length)
+      ) {
+        kinds.push("camel");
+      }
+
+      kinds = kinds.slice(0, 2);
+
+      /* Animated silhouettes */
+      if (!reduced) {
+        kinds.forEach((kind, place) => {
+          const runner = document.createElement("div");
+
+          runner.className = "sd-runner";
+          runner.dataset.kind = kind;
+          runner.setAttribute("aria-hidden", "true");
+
+          if (place === 1) {
+            runner.dataset.second = "yes";
+          }
+
+          runner.style.animationDelay =
+            "-" +
+            ((index * 1.8 + place * 2.1) % 9) +
+            "s";
+
+          runner.innerHTML = illustrations[kind];
+          media.appendChild(runner);
+        });
+      }
+
+      card.classList.add("sd-motion-card");
+
+      if (observer) {
+        observer.observe(card);
+      } else {
+        card.classList.add(
+          "sd-revealed",
+          "sd-playing"
+        );
+      }
+    });
+  }
+
+  /* ===================================
+     INITIALIZE
+  =================================== */
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      setupDesertMotion,
+      { once: true }
+    );
+  } else {
+    setupDesertMotion();
+  }
+
+})();
