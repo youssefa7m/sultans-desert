@@ -906,3 +906,217 @@ document.addEventListener("DOMContentLoaded", () => {
     true
   );
 });
+
+/* =========================================
+   BOOKING RECORD + PRIVATE REVIEW LINKS
+========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Automatically fill the guest's review
+  // code when opening their private link.
+
+  const urlParams =
+    new URLSearchParams(window.location.search);
+
+  const linkCode = urlParams.get("review");
+
+  if (linkCode) {
+    const code = /^SDMMT-/i.test(linkCode)
+      ? linkCode.toUpperCase()
+      : linkCode;
+
+    const validCode =
+      /^(?:SDMMT-[A-F0-9]{16}|[a-f0-9]{64})$/.test(code);
+
+    if (validCode) {
+      const reviewTokenField =
+        document.getElementById("review-token");
+
+      if (reviewTokenField) {
+        reviewTokenField.value = code;
+
+        // Remove the code from the address bar.
+        urlParams.delete("review");
+
+        const remainingQuery = urlParams.toString();
+
+        window.history.replaceState(
+          window.history.state,
+          "",
+          window.location.pathname +
+          (remainingQuery ? "?" + remainingQuery : "") +
+          (window.location.hash || "#reviews")
+        );
+      }
+    }
+  }
+
+  const bookingForm =
+    document.getElementById("booking-form");
+
+  if (!bookingForm) return;
+
+  /* =========================================
+     CUSTOMER REVIEW CONSENT
+  ========================================= */
+
+  const consentWrapper =
+    document.createElement("div");
+
+  consentWrapper.className =
+    "review-followup-consent";
+
+  consentWrapper.style.margin = "18px 0";
+  consentWrapper.style.fontSize = "14px";
+  consentWrapper.style.lineHeight = "1.6";
+
+  const consentLabel =
+    document.createElement("label");
+
+  consentLabel.style.display = "flex";
+  consentLabel.style.alignItems = "flex-start";
+  consentLabel.style.gap = "10px";
+
+  const consentCheckbox =
+    document.createElement("input");
+
+  consentCheckbox.id = "review-followup-consent";
+  consentCheckbox.type = "checkbox";
+  consentCheckbox.style.width = "18px";
+  consentCheckbox.style.height = "18px";
+  consentCheckbox.style.marginTop = "3px";
+  consentCheckbox.style.flexShrink = "0";
+
+  const consentText =
+    document.createElement("span");
+
+  consentText.textContent =
+    "I agree to receive one optional WhatsApp message " +
+    "asking for a review after my experience.";
+
+  consentLabel.append(
+    consentCheckbox,
+    consentText
+  );
+
+  consentWrapper.appendChild(consentLabel);
+
+  const firstBookingButton =
+    bookingForm.querySelector('button[type="submit"]');
+
+  if (firstBookingButton) {
+    bookingForm.insertBefore(
+      consentWrapper,
+      firstBookingButton
+    );
+  } else {
+    bookingForm.appendChild(consentWrapper);
+  }
+
+  /* =========================================
+     RECORD BOOKING IN SUPABASE
+  ========================================= */
+
+  let requestId = crypto.randomUUID();
+  let previousSignature = null;
+
+  function recordBookingRequest() {
+    const value = (id) =>
+      document.getElementById(id)?.value?.trim() || "";
+
+    const name = value("customer-name");
+    const phone = value("customer-phone");
+    const activity = value("activity");
+    const requestedDate = value("date");
+    const partySize = Number(value("people"));
+    const notes = value("notes");
+
+    if (
+      name.length < 2 ||
+      phone.replace(/\D/g, "").length < 8 ||
+      !activity ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(requestedDate) ||
+      !Number.isInteger(partySize) ||
+      partySize < 1 ||
+      partySize > 30
+    ) {
+      return;
+    }
+
+    const signature = JSON.stringify([
+      name,
+      phone,
+      activity,
+      requestedDate,
+      partySize,
+      notes,
+      consentCheckbox.checked
+    ]);
+
+    if (previousSignature !== signature) {
+      requestId = crypto.randomUUID();
+      previousSignature = signature;
+    }
+
+    const payload = {
+      request_id: requestId,
+      customer_name: name,
+      whatsapp_number: phone,
+      activity_name: activity,
+      requested_date: requestedDate,
+      party_size: partySize,
+      pickup_notes: notes,
+      review_opt_in: consentCheckbox.checked
+    };
+
+    // Save the booking without interrupting
+    // the existing WhatsApp or Email buttons.
+
+    fetch(
+      SUPABASE_URL + "/functions/v1/booking-request",
+      {
+        method: "POST",
+        keepalive: true,
+        headers: {
+          apikey: SUPABASE_PUBLISHABLE_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    )
+    .then((response) => {
+      if (!response.ok) {
+        console.warn(
+          "Booking request was not saved."
+        );
+      }
+    })
+    .catch((error) => {
+      console.warn(
+        "Booking recording failed:",
+        error
+      );
+    });
+  }
+
+  bookingForm.addEventListener(
+    "submit",
+    recordBookingRequest,
+    true
+  );
+
+  document.getElementById("send-whatsapp")
+    ?.addEventListener(
+      "click",
+      recordBookingRequest,
+      true
+    );
+
+  document.getElementById("send-email")
+    ?.addEventListener(
+      "click",
+      recordBookingRequest,
+      true
+    );
+});
